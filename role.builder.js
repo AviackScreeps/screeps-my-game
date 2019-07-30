@@ -11,10 +11,9 @@ var roleBuilder = {
             }
         }
         else {
-            var targets = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
-            console.log(targets.length);
+            var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
 
-            if (targets.length > 0) {
+            if (target != undefined && target != null) {
                 if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
                 }
