@@ -57,18 +57,18 @@ module.exports.loop = function () {
         else if (upgraders.length < minimumAmountOfUpgraders) {
             var newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
         else if (builders.length < amountOfBuilders) {
             var newName = 'Builder' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
                 { memory: { role: 'builder' } });
         }
         else if (upgraders.length < amountOfUpgraders) {
             var newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
 
