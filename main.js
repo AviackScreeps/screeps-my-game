@@ -27,8 +27,8 @@ module.exports.loop = function () {
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     //console.log('Harvesters: ' + harvesters.length);
     var amountOfHarvesters = 3;
-    var amountOfUpgraders = 7;
-    var amountOfBuilders = 2;
+    var amountOfUpgraders = 6;
+    var amountOfBuilders = 3;
 
     if(harvesters.length < amountOfHarvesters) {
         var newName = 'Harvester' + Game.time;
@@ -51,7 +51,7 @@ module.exports.loop = function () {
     if(Game.spawns['Spawn1'].spawning) { 
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
         Game.spawns['Spawn1'].room.visual.text(
-            'oh no' + spawningCreep.memory.role,
+            'oh no ' + spawningCreep.memory.role,
             Game.spawns['Spawn1'].pos.x + 1, 
             Game.spawns['Spawn1'].pos.y, 
             {align: 'left', opacity: 0.8});
