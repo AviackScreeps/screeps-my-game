@@ -3,20 +3,14 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
 module.exports.loop = function () {
-    console.log("GitTest");
+   
     if(Game.time % 250 == 0 || Memory.cleanNotifies == true) {
-        //console.log("clean notifies");
         for(var name in Game.creeps) {
-            //if(Game.creeps[name].my) {
-                Game.creeps[name].notifyWhenAttacked(false);
-            //}
-            //console.log(Game.creeps[name]);
+            Game.creeps[name].notifyWhenAttacked(false);
+
         }
         for(var name in Game.structures) {
-            //if(Game.structures[name].my) {
-                Game.structures[name].notifyWhenAttacked(false);
-            //}
-            //console.log(Game.structures[name]);
+            Game.structures[name].notifyWhenAttacked(false);
         }
         Memory.cleanNotifies = false
     }
@@ -72,7 +66,7 @@ module.exports.loop = function () {
             roleUpgrader.run(creep);
         }
         if(creep.memory.role == 'builder') {
-            roleUpgrader.run(creep);
+            roleBuilder.run(creep);
         }
     }
 }
