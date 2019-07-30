@@ -28,6 +28,7 @@ module.exports.loop = function () {
     var underAttack = (hostileCreeps.length > 0);
 
     if (underAttack) {
+        console.log("attacked");
         var newName = 'TikajZGorodu' + Game.time;
         Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, RANGED_ATTACK, MOVE], newName,
             { memory: { role: 'ranged' } });
