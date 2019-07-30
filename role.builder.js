@@ -19,11 +19,11 @@ var roleBuilder = {
             creep.memory.working = true;    
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (s) => {
-                    console.log(s.hits / s.hitsMax);
+                    console.log("" + (s.hits / s.hitsMax) + ((s.hits / s.hitsMax) < 0.95));
                     (s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART
                 }
             });
-
+            console.log("|==| target = " + target);
             if (target != undefined) {
                 console.log(creep + " is repairing");
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
