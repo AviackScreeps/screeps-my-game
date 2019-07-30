@@ -82,7 +82,7 @@ module.exports.loop = function () {
             roleBuilder.run(creep);
         }
         if (creep.memory.role == 'ranged') {
-            roleRanged.run(creep, hostiles);
+            roleRanged.run(creep, hostileCreeps);
         }
     }
 }
