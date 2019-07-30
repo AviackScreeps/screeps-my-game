@@ -17,9 +17,9 @@ var roleBuilder = {
 
             }
             creep.memory.working = true;    
-            var target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (s) => {
-                    console.log(s.hits / s.hitsMax);
+                    //console.log(s.hits / s.hitsMax);
                     (s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART
                 }
             });
