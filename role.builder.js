@@ -22,6 +22,7 @@ var roleBuilder = {
             });
 
             if (target != undefined) {
+                console.log(creep + "is repairing");
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
@@ -30,11 +31,12 @@ var roleBuilder = {
 
                 var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
                 if (target != undefined) {
-
+                    console.log(creep + "is building");
                     if (creep.build(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
                 } else {
+                    console.log(creep + "is walling");
                     var target = creep.room.find(FIND_STRUCTURES, {
                         filter: (s) => s.structureType == STRUCTURE_RAMPART
                     });
