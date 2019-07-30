@@ -51,7 +51,7 @@ module.exports.loop = function () {
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
                 { memory: { role: 'harvester' } });
         }
         else if (upgraders.length < minimumAmountOfUpgraders) {
