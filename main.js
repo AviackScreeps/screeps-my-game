@@ -33,13 +33,13 @@ module.exports.loop = function () {
     if(harvesters.length < amountOfHarvesters) {
         var newName = 'Harvester' + Game.time;
         //console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,WORK,CARRY,MOVE,MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
             {memory: {role: 'harvester'}});
     }
     else if(upgraders.length < amountOfUpgraders){
        var newName = 'Upgrader' + Game.time;
         //console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,CARRY,MOVE,MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
             {memory: {role: 'upgrader'}}); 
     }
     else if(builders.length < amountOfBuilders) {
