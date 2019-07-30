@@ -1,4 +1,4 @@
-
+var roleUpgrader = require('role.upgrader');
 
 var roleBuilder = {
 
@@ -29,6 +29,7 @@ var roleBuilder = {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
                 } else {
+                    roleUpgrader.run(creep);
 
                 }
 
