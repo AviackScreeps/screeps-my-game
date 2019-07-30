@@ -23,7 +23,10 @@ module.exports.loop = function () {
         }
     }
 
-    hostileCreeps = Game.creeps[Object.keys(Memory.creeps)[0]].room.find(FIND_HOSTILE_CREEPS);
+    if (Game.creeps.length > 0) {
+        hostileCreeps = Game.creeps[Object.keys(Memory.creeps)[0]].room.find(FIND_HOSTILE_CREEPS);
+    }
+    
 
     var underAttack = (hostileCreeps.length > 0);
 
