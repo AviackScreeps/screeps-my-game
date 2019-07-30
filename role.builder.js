@@ -4,13 +4,19 @@ var roleBuilder = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        if (creep.carry.energy < creep.carryCapacity) {
+        if (creep.carry.energy < creep.carryCapacity && !creep.memory.working ) {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         }
         else {
+            if (creep.carry.energy == 0) {
+                creep.memory.working = false;
+                return;
+
+            }
+            creep.memory.working = true;    
             var target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
                 filter: (s) => (s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL
             });
