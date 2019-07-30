@@ -18,11 +18,10 @@ var roleBuilder = {
             }
             creep.memory.working = true;    
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: (s) => {
-                    console.log("" + s.structureType + (s.hits / s.hitsMax) + ((s.hits / s.hitsMax) < 0.95) + ((s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART));
-                    (s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART
+                filter: function (object) {
+                    return ((object.hits / object.hitsMax) < 0.95 && object.structureType != STRUCTURE_WALL && object.structureType != STRUCTURE_RAMPART);
                 }
-            });
+            }); 
             console.log("|==| target = " + target);
             if (target != undefined) {
                 console.log(creep + " is repairing");
