@@ -30,7 +30,7 @@ module.exports.loop = function () {
     if (underAttack) {
         console.log("attacked");
         var newName = 'TikajZGorodu' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, RANGED_ATTACK, MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([TOUGH, RANGED_ATTACK, MOVE], newName,
             { memory: { role: 'ranged' } });
     }
     else {
