@@ -18,7 +18,7 @@ var roleBuilder = {
             }
             creep.memory.working = true;    
             var target = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
-                filter: (s) => (s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL
+                filter: (s) => (s.hits / s.hitsMax) < 0.95 && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART 
             });
 
             if (target != undefined) {
@@ -35,7 +35,12 @@ var roleBuilder = {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
                 } else {
-                    roleUpgrader.run(creep);
+                    var target = creep.room.find(FIND_STRUCTURES, {
+                        filter: (s) => s.structureType == STRUCTURE_RAMPART
+                    });
+                    if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                    }
 
                 }
 
