@@ -3,7 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
 module.exports.loop = function () {
-    
+    console.log("GitTest");
     if(Game.time % 250 == 0 || Memory.cleanNotifies == true) {
         //console.log("clean notifies");
         for(var name in Game.creeps) {
