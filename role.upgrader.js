@@ -1,5 +1,5 @@
 var roleHarvester = require('role.harvester');
-
+//asddsakjhk
 var roleUpgrader = {
 
     /** @param {Creep} creep **/
@@ -11,7 +11,7 @@ var roleUpgrader = {
             }
         }
         else {
-            if (creep.carry.energy == 0) {}
+            if (creep.carry.energy == 0) {
                 creep.memory.transfering = false;
             } else {
                 creep.memory.transfering = true;
