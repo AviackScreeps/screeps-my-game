@@ -62,8 +62,14 @@ module.exports.loop = function () {
         }
         else if (builders.length < amountOfBuilders) {
             var newName = 'Builder' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
-                { memory: { role: 'builder' } });
+            if (Game.rooms['W12S3'].energyCapacityAvailable > 300) {
+                Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName,
+                    { memory: { role: 'builder' } });
+            } else {
+                Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
+                    { memory: { role: 'builder' } });
+            }
+           
         }
         else if (upgraders.length < amountOfUpgraders) {
             var newName = 'Upgrader' + Game.time;
