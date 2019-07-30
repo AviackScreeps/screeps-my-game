@@ -14,8 +14,8 @@ var roleBuilder = {
             var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
 
             if (target != undefined && target != null) {
-                if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
+                if (creep.build(target[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target[0], { visualizePathStyle: { stroke: '#ffffff' } });
                 }
             } else {
                 creep.moveTo(Game.flags.IdleFlag);
