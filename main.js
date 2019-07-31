@@ -34,7 +34,7 @@ module.exports.loop = function () {
     
 
     var underAttack = (hostileCreeps.length > 0);
-    underAttack = true;
+    //underAttack = true;
 
     if (underAttack) {
         console.log("attacked");
