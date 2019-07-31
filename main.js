@@ -57,6 +57,8 @@ module.exports.loop = function () {
             numOfDefenders = 99;
         }
 
+        console.log('need ' + numOfDefenders + ' defenders');
+
         var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'baseMeleeDefender' && creep.spawning == false);
 
         if (defenders.length < numOfDefenders) {
@@ -99,7 +101,7 @@ module.exports.loop = function () {
             }
         }
 
-        console.log('towers');
+        //console.log('towers');
         var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
 
         for (let tower of towers) {
