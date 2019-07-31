@@ -179,10 +179,10 @@ module.exports.loop = function () {
 
 function initializeDefence(room) {
     Memory.defenceParameters = {};
-    Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, [][]);
-    Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, [][]);
-    Memory.defenceParameters.RightSectorEnemies = countHostilesInSector(room, 50, 40, [][]);
-    Memory.defenceParameters.BaseEnemies = countHostilesInSector(room, 25, 25, [][]);
+    Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, {});
+    Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, {});
+    Memory.defenceParameters.RightSectorEnemies = countHostilesInSector(room, 50, 40, {});
+    Memory.defenceParameters.BaseEnemies = countHostilesInSector(room, 25, 25, {});
 }
 
 function countHostilesInSector(room, x, y, visitedArray) {
