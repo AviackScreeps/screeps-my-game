@@ -39,7 +39,7 @@ module.exports.loop = function () {
 
     var underAttack = (hostileCreeps.length > 0);
     //console.log("" + hostileCreeps + " " + underAttack);
-    underAttack = false;
+    //underAttack = false;
 
     if (underAttack) {
         console.log("attacked");
@@ -73,7 +73,12 @@ module.exports.loop = function () {
             var freeRamparts = [];
             if (Memory.defenceParameters.LeftSectorEnemies > 0) {
                 var buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9);
-                freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
+                for (let s of buildings) {
+                    if (s.structureType == STRUCTURE_RAMPART) {
+                        freeRamparts[freeRamparts.length - 1] = s;
+                    }
+                }
+                //freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
             }
             for (let creep of defenders) {
                 if (creep.memory.rampart == undefined) {
