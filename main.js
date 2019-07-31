@@ -179,6 +179,7 @@ module.exports.loop = function () {
 }
 
 function initializeDefence(room) {
+    console.log(' ====-1');
     Memory.defenceParameters = {};
     console.log(' ====0');
     Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, Create2DArray(50));
