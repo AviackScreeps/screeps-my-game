@@ -180,6 +180,7 @@ module.exports.loop = function () {
 
 function initializeDefence(room) {
     Memory.defenceParameters = {};
+    console.log(' ====0');
     Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, Create2DArray(50));
     console.log('====1');
     Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, Create2DArray(50));
