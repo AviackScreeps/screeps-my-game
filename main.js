@@ -179,17 +179,17 @@ module.exports.loop = function () {
 }
 
 function initializeDefence(room) {
-    console.log(' ====-1');
+    //console.log(' ====-1');
     Memory.defenceParameters = {};
-    console.log(' ====0');
+    //console.log(' ====0');
     Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, Create2DArray(50));
-    console.log('====1');
+    //console.log('====1');
     Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, Create2DArray(50));
-    console.log('====2');
+    //console.log('====2');
     Memory.defenceParameters.RightSectorEnemies = countHostilesInSector(room, 50, 40, Create2DArray(50));
-    console.log('====3');
+    //console.log('====3');
     Memory.defenceParameters.BaseEnemies = countHostilesInSector(room, 25, 25, Create2DArray(50));
-    console.log('====4');
+    //console.log('====4');
 }
 
 function countHostilesInSector(room, x, y, visitedArray) {
@@ -197,17 +197,17 @@ function countHostilesInSector(room, x, y, visitedArray) {
     var result = 0;
 
     if (x < 0 || x >= 50 || y < 0 || y >= 50) {
-        console.log(' out of bounds ' + x + ' ' + y);
+        //console.log(' out of bounds ' + x + ' ' + y);
         return result;
     }
 
     if (visitedArray[x][y] == true) {
-        console.log('visited' + x + ' ' + y);
+        //console.log('visited' + x + ' ' + y);
         return result;
     }
 
-    if (room.getTerrain.get(x, y) == TERRAIN_MASK_WALL) {
-        console.log(' terrain ' + x + ' ' + y);
+    if (room.getTerrain().get(x, y) == TERRAIN_MASK_WALL) {
+        //console.log(' terrain ' + x + ' ' + y);
         return result;
     }
 
@@ -216,7 +216,7 @@ function countHostilesInSector(room, x, y, visitedArray) {
     var objectsInTile = room.lookAt(x, y);
     var walls = _.filter(objectsInTile, (s) => s.type == 'structure');
     if (walls.length > 0) {
-        console.log(' wall ' + x + ' ' + y);
+        //console.log(' wall ' + x + ' ' + y);
         return result;
     }
 
