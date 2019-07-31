@@ -93,7 +93,13 @@ module.exports.loop = function () {
             }
         }
 
-  
+        console.log('towers');
+        var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
+
+        for (let tower of towers) {
+            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            tower.attack(target);
+        }
 
     }
     else {
@@ -193,13 +199,16 @@ module.exports.loop = function () {
         }
     }
 
-    console.log('towers');
-    var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
+    if (Memory.attackByTower == true) {
+        console.log('towers attacking anyway');
+        var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
 
-    for (let tower of towers) {
-        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        tower.attack(target);
+        for (let tower of towers) {
+            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            tower.attack(target);
+        }
     }
+ 
 
 }
 
