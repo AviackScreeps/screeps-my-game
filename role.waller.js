@@ -30,6 +30,11 @@ var roleWaller = {
                 //console.log(targets)
                 var minHits = 2;
                 for (let s of targets) {
+                    pathfinding = PathFinder.search(creep, s);
+                    If(pathfinding == undefined || pathfinding.incomplete == true) {
+                        continue;
+                    }
+                 
                     //console.log(s.hits / s.hitsMax);
                     if ((s.hits / s.hitsMax) < minHits) {
                         minHits = s.hits / s.hitsMax;
