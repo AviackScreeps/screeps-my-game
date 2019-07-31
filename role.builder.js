@@ -43,7 +43,7 @@ var roleBuilder = {
                 } else {
                     //console.log(creep + " is walling");
 
-                    target = creep.memory.target;
+                    target = Game.getObjectById(creep.memory.target);
                     if (target == undefined) {
                         var targets = creep.room.find(FIND_STRUCTURES, {
                             filter: (s) => s.structureType == STRUCTURE_RAMPART
@@ -64,7 +64,7 @@ var roleBuilder = {
                         //console.log('no rampart to repair');
                     } else {
                         //console.log("repairing " + target.structureType + " " + target + " " + repairResult);
-                        creep.memory.target = target;
+                        creep.memory.target = target.id;
                         if (repairResult == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                         }
