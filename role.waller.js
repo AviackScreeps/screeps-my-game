@@ -27,6 +27,7 @@ var roleWaller = {
                         return ((object.hits < object.hitsMax) && (object.structureType == STRUCTURE_WALL || object.structureType == STRUCTURE_RAMPART));
                     }
                 });
+                console.log(targets)
                 var minHits = 2;
                 for (var s in targets) {
                     if (s.hits / s.hitsMax > minHits) {
