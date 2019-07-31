@@ -29,7 +29,7 @@ module.exports.loop = function () {
     }
 
 
-    room = Game.rooms['W12S3'];
+    //room = Game.rooms['W12S3'];
     console.log(room);
 
     var hostileCreeps = [];
@@ -39,7 +39,7 @@ module.exports.loop = function () {
     
 
     var underAttack = (hostileCreeps.length > 0);
-    console.log("" + hostileCreeps + " " + underAttack);
+    //console.log("" + hostileCreeps + " " + underAttack);
     //underAttack = true;
 
     if (underAttack) {
