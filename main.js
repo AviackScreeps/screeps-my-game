@@ -220,7 +220,7 @@ function countHostilesInSector(room, x, y, visitedArray) {
         return result;
     }
 
-    var HostileCreeps = _.filter(objectsInTile, (s) => s.type == creep && s.creep.my == false);
+    var HostileCreeps = _.filter(objectsInTile, (s) => s.type == 'creep' && s.creep.my == false);
     if (HostileCreeps.length > 0) {
         result++;
     }
