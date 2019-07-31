@@ -29,8 +29,8 @@ module.exports.loop = function () {
     }
 
 
-    //room = Game.rooms['W12S3'];
-    console.log(room);
+    room = Game.rooms['W12S3'];
+    //console.log(room);
 
     var hostileCreeps = [];
     if (Game.creeps.length > 0) {
