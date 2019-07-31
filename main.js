@@ -93,13 +93,7 @@ module.exports.loop = function () {
             }
         }
 
-        var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
-
-        for (let tower of towers) {
-            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            tower.attack(target);
-        }
-
+  
 
     }
     else {
@@ -198,6 +192,15 @@ module.exports.loop = function () {
             roleAttacker.run(creep);
         }
     }
+
+    console.log('towers');
+    var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
+
+    for (let tower of towers) {
+        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        tower.attack(target);
+    }
+
 }
 
 function initializeDefence(room) {
