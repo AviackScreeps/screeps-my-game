@@ -126,7 +126,7 @@ module.exports.loop = function () {
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName,
                 { memory: { role: 'harvester' } });
         }
         else if (upgraders.length < minimumAmountOfUpgraders) {
@@ -137,11 +137,7 @@ module.exports.loop = function () {
         }
         else if (builders.length < amountOfBuilders) {
             var newName = 'Builder' + Game.time;
-            if (Game.rooms['W12S3'].energyCapacityAvailable > 300) {
-                Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName,
-                    { memory: { role: 'builder' } });
-            } else {
-                Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                     { memory: { role: 'builder' } });
             }
 
@@ -149,7 +145,7 @@ module.exports.loop = function () {
         else if (upgraders.length < amountOfUpgraders) {
             var newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
         else if (attackers.length < amountOfAttackers) {
@@ -161,7 +157,7 @@ module.exports.loop = function () {
         else if (wallers.length < amountOfWallers) {
             var newName = 'Waller' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'waller' } });
         }
 
