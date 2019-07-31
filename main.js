@@ -180,10 +180,10 @@ module.exports.loop = function () {
 
 function initializeDefence(room) {
     Memory.defenceParameters = {};
-    Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, {});
-    Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, {});
-    Memory.defenceParameters.RightSectorEnemies = countHostilesInSector(room, 50, 40, {});
-    Memory.defenceParameters.BaseEnemies = countHostilesInSector(room, 25, 25, {});
+    Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, Create2DArray(50));
+    Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, Create2DArray(50));
+    Memory.defenceParameters.RightSectorEnemies = countHostilesInSector(room, 50, 40, Create2DArray(50));
+    Memory.defenceParameters.BaseEnemies = countHostilesInSector(room, 25, 25, Create2DArray(50));
 }
 
 function countHostilesInSector(room, x, y, visitedArray) {
@@ -221,4 +221,14 @@ function countHostilesInSector(room, x, y, visitedArray) {
     result += countHostilesInSector(room, x, y + 1, visitedArray);
 
     return result;
+}
+
+function Create2DArray(rows) {
+    var arr = [];
+
+    for (var i = 0; i < rows; i++) {
+        arr[i] = [];
+    }
+
+    return arr;
 }
