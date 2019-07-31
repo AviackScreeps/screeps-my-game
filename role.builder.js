@@ -39,8 +39,9 @@ var roleBuilder = {
                 } else {
                     console.log(creep + " is walling");
                     var target = creep.room.find(FIND_STRUCTURES, {
-                        filter: (s) => s.structureType == STRUCTURE_RAMPART
+                        filter: (s) => { s.structureType == STRUCTURE_RAMPART }
                     });
+                    target = Game.getObjectByID(target.id);
                     repairResult = creep.repair(target);
                     console.log("repairing " + target.structureType + " " + target + " " + repairResult);
                     if (repairResult == ERR_NOT_IN_RANGE) {
