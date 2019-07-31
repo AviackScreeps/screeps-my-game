@@ -30,7 +30,7 @@ var roleWaller = {
                 //console.log(targets)
                 var minHits = 2;
                 for (let s of targets) {
-                    console.log(s.hits / s.hitsMax);
+                    //console.log(s.hits / s.hitsMax);
                     if ((s.hits / s.hitsMax) < minHits) {
                         minHits = s.hits / s.hitsMax;
                         targetStructure = s;
@@ -41,7 +41,7 @@ var roleWaller = {
 
             
             if (targetStructure != undefined) {
-                console.log(creep + " is repairing");
+                //console.log(creep + " is repairing");
                 if (creep.repair(targetStructure) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targetStructure, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
