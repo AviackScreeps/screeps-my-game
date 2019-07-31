@@ -29,7 +29,7 @@ module.exports.loop = function () {
     }
 
 
-    room = Game.creeps[Object.keys(Memory.creeps)[0]].room;
+    room = Game.rooms['W12S3'];
     console.log(room);
 
     var hostileCreeps = [];
