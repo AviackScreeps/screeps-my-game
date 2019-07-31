@@ -9,9 +9,9 @@ var roleRanged = {
             return;
         }
 
-        if (creep.pos.room.name != 'W13S3') {
+        if (creep.room.name != 'W13S3') {
             if (creep.memory.exitLocation == undefined) {
-                var exitCode = creep.pos.room.findExitTo('W13S3');
+                var exitCode = creep.room.findExitTo('W13S3');
 
                 var exitPos = creep.pos.findClosestByPath(exitCode);
                 creep.memory.exitLocation = { x: exitPos.x, y: exitPos.y };
