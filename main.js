@@ -32,10 +32,9 @@ module.exports.loop = function () {
     room = Game.rooms['W12S3'];
     //console.log(room);
 
-    var hostileCreeps = [];
-    if (Game.creeps.length > 0) {
-        hostileCreeps = room.find(FIND_HOSTILE_CREEPS);
-    }
+    
+     hostileCreeps = room.find(FIND_HOSTILE_CREEPS);
+    
     
 
     var underAttack = (hostileCreeps.length > 0);
