@@ -4,6 +4,11 @@ var roleRanged = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
+
+        if (creep = undefined) {
+            return;
+        }
+
         if (creep.pos.room.name != 'W13S3') {
             if (creep.memory.exitLocation == undefined) {
                 var exitCode = creep.pos.room.findExitTo('W13S3');
