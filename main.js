@@ -195,14 +195,17 @@ function countHostilesInSector(room, x, y, visitedArray) {
     var result = 0;
 
     if (x < 0 || x >= 50 || y < 0 || y >= 50) {
+        console.log(' out of bounds ' + x + ' ' + y);
         return result;
     }
 
     if (visitedArray[x][y] == true) {
+        console.log('visited' + x + ' ' + y);
         return result;
     }
 
     if (room.getTerrain.get(x, y) == TERRAIN_MASK_WALL) {
+        console.log(' terrain ' + x + ' ' + y);
         return result;
     }
 
@@ -211,6 +214,7 @@ function countHostilesInSector(room, x, y, visitedArray) {
     var objectsInTile = room.lookAt(x, y);
     var walls = _.filter(objectsInTile, (s) => s.type == 'structure');
     if (walls.length > 0) {
+        console.log(' wall ' + x + ' ' + y);
         return result;
     }
 
