@@ -39,14 +39,19 @@ var roleBuilder = {
                 } else {
                     console.log(creep + " is walling");
                     var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: (s) => { s.structureType == STRUCTURE_RAMPART }
+                        filter: (s) =>  s.structureType == STRUCTURE_RAMPART 
                     });
              
                     repairResult = creep.repair(target);
-                    console.log("repairing " + target.structureType + " " + target + " " + repairResult);
-                    if (repairResult == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                    if (target == undefined) {
+                        console.log('no rampart to repair');
+                    } else {
+                        console.log("repairing " + target.structureType + " " + target + " " + repairResult);
+                        if (repairResult == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                        }
                     }
+                    
 
                 }
 
