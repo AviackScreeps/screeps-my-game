@@ -19,12 +19,15 @@ module.exports.loop = function () {
         Memory.cleanNotifies = false
     }
 
-    for(var name in Memory.creeps) {
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
+    if (Game.time % 250) {
+        for (var name in Memory.creeps) {
+            if (!Game.creeps[name]) {
+                delete Memory.creeps[name];
+                console.log('Clearing non-existing creep memory:', name);
+            }
         }
     }
+
 
     room = Game.creeps[Object.keys(Memory.creeps)[0]].room;
 
@@ -88,6 +91,13 @@ module.exports.loop = function () {
                 }
 
             }
+        }
+
+        var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
+
+        for (let tower of towers) {
+            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            tower.attack(target);
         }
 
 
