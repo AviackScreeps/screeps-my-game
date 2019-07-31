@@ -22,7 +22,6 @@ var roleBuilder = {
                     return ((object.hits / object.hitsMax) < 0.95 && object.structureType != STRUCTURE_WALL && object.structureType != STRUCTURE_RAMPART);
                 }
             });
-            console.log("|==| target = " + target);
             if (target != undefined) {
                 console.log(creep + " is repairing");
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
@@ -42,7 +41,9 @@ var roleBuilder = {
                     var target = creep.room.find(FIND_STRUCTURES, {
                         filter: (s) => s.structureType == STRUCTURE_RAMPART
                     });
-                    if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                    repairResult = creep.repair(target);
+                    console.log("repairing ramparts" + target + " " + repairResult);
+                    if (repairResult == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
 
