@@ -2,6 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRanged = require('role.ranged');
+var roleWaller = require('role.waller');
 
 module.exports.loop = function () {
    
@@ -42,11 +43,13 @@ module.exports.loop = function () {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+        var wallers = _.filter(Game.creeps, (creep) => creep.memory.role == 'waller');
         //console.log('Harvesters: ' + harvesters.length);
         var amountOfHarvesters = 3;
         var minimumAmountOfUpgraders = 1;
         var amountOfUpgraders = 6;
         var amountOfBuilders = 3;
+        var amountOfWallers = 2;
 
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
@@ -69,13 +72,19 @@ module.exports.loop = function () {
                 Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName,
                     { memory: { role: 'builder' } });
             }
-           
+
         }
         else if (upgraders.length < amountOfUpgraders) {
             var newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
+        }
+        else if (wallers.length < amountOfWallers) {
+            var newName = 'Waller' + Game.time;
+            //console.log('Spawning new harvester: ' + newName);
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+                { memory: { role: 'waller' } });
         }
 
         if (Game.spawns['Spawn1'].spawning) {
@@ -100,6 +109,9 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'ranged') {
             roleRanged.run(creep, hostileCreeps);
+        }
+        if (creep.memory.role == 'waller') {
+            roleWaller.run(creep);
         }
     }
 }
