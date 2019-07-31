@@ -72,7 +72,7 @@ module.exports.loop = function () {
         } else {
             var freeRamparts = [];
             if (Memory.defenceParameters.LeftSectorEnemies > 0) {
-                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9);
+                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9, true);
                 for (let s of buildings) {
                     if (s.structureType == STRUCTURE_RAMPART) {
                         freeRamparts[freeRamparts.length - 1] = s;
