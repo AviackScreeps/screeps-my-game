@@ -268,7 +268,7 @@ function countHostilesInSector(room, x, y, visitedArray) {
     result += countHostilesInSector(room, x, y - 1, visitedArray);
     result += countHostilesInSector(room, x, y + 1, visitedArray);
 
-    console.log('res = ' + result);
+    //console.log('res = ' + result);
 
     return result;
 }
