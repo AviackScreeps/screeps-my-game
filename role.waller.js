@@ -30,6 +30,7 @@ var roleWaller = {
                 //console.log(targets)
                 var minHits = 2;
                 for (var s in targets) {
+                    console.log(s.hits / s.hitsMax);
                     if ((s.hits / s.hitsMax) < minHits) {
                         minHits = s.hits / s.hitsMax;
                         targetStructure = s;
