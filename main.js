@@ -30,6 +30,7 @@ module.exports.loop = function () {
 
 
     room = Game.creeps[Object.keys(Memory.creeps)[0]].room;
+    console.log(room);
 
     var hostileCreeps = [];
     if (Game.creeps.length > 0) {
