@@ -22,6 +22,7 @@ var roleRanged = {
 
             if (target == undefined) {
                 target = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
+                console.log(target);
             }
 
             if (target == undefined) {
