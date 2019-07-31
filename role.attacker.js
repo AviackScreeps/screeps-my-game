@@ -18,11 +18,17 @@ var roleRanged = {
             }
             creep.moveTo(creep.memory.exitLocation.x, creep.memory.exitLocation.y);
         } else {
-            var target = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 1);
+            var targets = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 1);
+
+            var target = undefined;
+
+            if (targets.length > 0) {
+                target = _.first(targets);
+            }
 
             if (target == undefined) {
                 target = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
-                console.log(target);
+                //console.log(target);
             }
 
             if (target == undefined) {
