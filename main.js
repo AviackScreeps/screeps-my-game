@@ -102,7 +102,7 @@ module.exports.loop = function () {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var wallers = _.filter(Game.creeps, (creep) => creep.memory.role == 'waller');
-        var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attackers');
+        var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
         //console.log('Harvesters: ' + harvesters.length);
         var amountOfHarvesters = 3;
         var minimumAmountOfUpgraders = 1;
@@ -140,7 +140,7 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
-        else if (attackers.lenfth < amountOfAttackers) {
+        else if (attackers.length < amountOfAttackers) {
             var newName = 'NeOleg' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([ATTACK, ATTACK, MOVE, MOVE], newName,
