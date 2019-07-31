@@ -4,7 +4,7 @@ var roleRanged = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-
+        console.log(creep);
         if (creep = undefined) {
             return;
         }
