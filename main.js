@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRanged = require('role.ranged');
 var roleWaller = require('role.waller');
+var roleBaseMeleeDefender = require('role.baseMeleeDefender');
 
 module.exports.loop = function () {
    
@@ -24,9 +25,11 @@ module.exports.loop = function () {
         }
     }
 
+    room = Game.creeps[Object.keys(Memory.creeps)[0]].room;
+
     var hostileCreeps = [];
     if (Game.creeps.length > 0) {
-        hostileCreeps = Game.creeps[Object.keys(Memory.creeps)[0]].room.find(FIND_HOSTILE_CREEPS);
+        hostileCreeps = room.find(FIND_HOSTILE_CREEPS);
     }
     
 
@@ -34,11 +37,64 @@ module.exports.loop = function () {
 
     if (underAttack) {
         console.log("attacked");
-        var newName = 'TikajZGorodu' + Game.time;
-        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, RANGED_ATTACK, MOVE, MOVE], newName,
-            { memory: { role: 'ranged' } });
+
+        if (Memory.defenceParameters == undefined) {
+            initializeDefence(room);
+        }
+
+        var numOfDefenders = 0;
+        if (Memory.defenceParameters.RightSectorEnemies > 0) {
+            numOfDefenders += 1;
+        }
+        if (Memory.defenceParameters.BaseEnemies > 0) {
+            console.log("they are trying to break through!");
+            numOfDefenders = 99;
+        }
+
+        var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'baseMeleeDefender' && creep.spawning == false);
+
+        if (defenders.length < numOfDefenders) {
+            var newName = 'TikajZGorodu' + Game.time;
+            Game.spawns['Spawn1'].spawnCreep([TOUGH, ATTACK, ATTACK, ATTACK, MOVE], newName,
+                { memory: { role: 'baseMeleeDefender' } });
+        }
+
+        if (Memory.defenceParameters.BaseEnemies > 0) {
+            for (let creep of defenders) {
+                creep.memory.fightForYourLife = true;
+            }
+        } else {
+            var freeRamparts = [];
+            if (Memory.defenceParameters.RightSectorEnemies > 0) {
+                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9);
+                freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
+            }
+            for (let creep of defenders) {
+                if (creep.memory.rampart == undefined) {
+                    creep.memory.rampart = _.first(freeRamparts).id;
+                    _.pullAt(freeRamparts, [0]);
+                }
+
+                var rampart = Game.getObjectById(creep.memory.rampart);
+                if (rampart.pos.isEqualTo(creep.pos)) {
+                    var hostilesInrange = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 1);
+                    if (hostilesInrange.length > 0) {
+                        creep.attack(_.first(hostilesInrange));
+                    }
+                } else {
+                    creep.moveTo(rampart);
+                }
+
+            }
+        }
+
+
     }
     else {
+
+        if (Memory.defenceParameters != undefined) {
+            delete Memory.defenceParameters;
+        }
 
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -98,6 +154,11 @@ module.exports.loop = function () {
     }
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+
+        if (underAttack == false && creep.memory.rampart != undefined) {
+            delete creep.memory.rampart;    
+        }
+
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
@@ -114,4 +175,49 @@ module.exports.loop = function () {
             roleWaller.run(creep);
         }
     }
+}
+
+function initializeDefence(room) {
+    Memory.defenceParameters = {};
+    Memory.defenceParameters.UpperSectorEnemies = countHostilesInSector(room, 40, 0, [][]);
+    Memory.defenceParameters.LeftSectorEnemies = countHostilesInSector(room, 0, 30, [][]);
+    Memory.defenceParameters.RightSectorEnemies = countHostilesInSector(room, 50, 40, [][]);
+    Memory.defenceParameters.BaseEnemies = countHostilesInSector(room, 25, 25, [][]);
+}
+
+function countHostilesInSector(room, x, y, visitedArray) {
+
+    var result = 0;
+
+    if (x < 0 || x >= 50 || y < 0 || y >= 50) {
+        return;
+    }
+
+    if (visitedArray[x][y] == true) {
+        return;
+    }
+
+    if (room.getTerrain.get(x, y) == TERRAIN_MASK_WALL) {
+        return;
+    }
+
+    visitedArray[x][y] = true;
+
+    var objectsInTile = room.lookAt(x, y);
+    var walls = _.filter(objectsInTile, (s) => s.type == 'structure');
+    if (walls.length > 0) {
+        return;
+    }
+
+    var HostileCreeps = _.filter(objectsInTile, (s) => s.type == creep && s.creep.my == false);
+    if (HostileCreeps.length > 0) {
+        result++;
+    }
+
+    result += countHostilesInSector(room, x - 1, y, visitedArray);
+    result += countHostilesInSector(room, x + 1, y, visitedArray);
+    result += countHostilesInSector(room, x, y - 1, visitedArray);
+    result += countHostilesInSector(room, x, y + 1, visitedArray);
+
+    return result;
 }
