@@ -16,7 +16,7 @@ var roleRanged = {
                 var exitPos = creep.pos.findClosestByPath(exitCode);
                 creep.memory.exitLocation = { x: exitPos.x, y: exitPos.y };
             }
-            creep.moveTo(exitPos.x, exitPos.y);
+            creep.moveTo(creep.memory.exitLocation.x, creep.memory.exitLocation.y);
         } else {
             var target = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 1);
 
