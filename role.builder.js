@@ -42,7 +42,7 @@ var roleBuilder = {
                         filter: (s) => s.structureType == STRUCTURE_RAMPART
                     });
                     repairResult = creep.repair(target);
-                    console.log("repairing ramparts" + target + " " + repairResult);
+                    console.log("repairing " + target.structureType + " " + target + " " + repairResult);
                     if (repairResult == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
