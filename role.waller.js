@@ -24,7 +24,7 @@ var roleWaller = {
             } else {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: function (object) {
-                        return ((object.hits < object.hitsMax) && object.structureType != STRUCTURE_WALL && object.structureType != STRUCTURE_RAMPART);
+                        return ((object.hits < object.hitsMax) && (object.structureType == STRUCTURE_WALL || object.structureType == STRUCTURE_RAMPART));
                     }
                 });
                 targetStructure = _.minBy(targets, (s) => (s.hits / s.hitsMax));
