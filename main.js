@@ -34,6 +34,7 @@ module.exports.loop = function () {
     
 
     var underAttack = (hostileCreeps.length > 0);
+    underAttack = true;
 
     if (underAttack) {
         console.log("attacked");
@@ -43,7 +44,7 @@ module.exports.loop = function () {
         }
 
         var numOfDefenders = 0;
-        if (Memory.defenceParameters.RightSectorEnemies > 0) {
+        if (Memory.defenceParameters.LeftSectorEnemies > 0) {
             numOfDefenders += 1;
         }
         if (Memory.defenceParameters.BaseEnemies > 0) {
@@ -65,7 +66,7 @@ module.exports.loop = function () {
             }
         } else {
             var freeRamparts = [];
-            if (Memory.defenceParameters.RightSectorEnemies > 0) {
+            if (Memory.defenceParameters.LeftSectorEnemies > 0) {
                 var buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9);
                 freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
             }
