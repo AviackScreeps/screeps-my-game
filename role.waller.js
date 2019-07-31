@@ -27,7 +27,14 @@ var roleWaller = {
                         return ((object.hits < object.hitsMax) && (object.structureType == STRUCTURE_WALL || object.structureType == STRUCTURE_RAMPART));
                     }
                 });
-                targetStructure = _.minBy(targets, (s) => (s.hits / s.hitsMax));
+                var minHits = 2;
+                for (var s in targets) {
+                    if (s.hits / s.hitsMax > minHits) {
+                        minHits = s.hits / s.hitsMax;
+                        targetStructure = s;
+                    }
+                }
+                //targetStructure = _.minBy(targets, (s) => (s.hits / s.hitsMax));
             }
 
             
