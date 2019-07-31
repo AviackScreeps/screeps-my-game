@@ -43,7 +43,7 @@ var roleBuilder = {
                     });
              
                     repairResult = creep.repair(target);
-                    //console.log("repairing " + target.structureType + " " + target + " " + repairResult);
+                    console.log("repairing " + target.structureType + " " + target + " " + repairResult);
                     if (repairResult == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
