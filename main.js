@@ -191,15 +191,15 @@ function countHostilesInSector(room, x, y, visitedArray) {
     var result = 0;
 
     if (x < 0 || x >= 50 || y < 0 || y >= 50) {
-        return;
+        return result;
     }
 
     if (visitedArray[x][y] == true) {
-        return;
+        return result;
     }
 
     if (room.getTerrain.get(x, y) == TERRAIN_MASK_WALL) {
-        return;
+        return result;
     }
 
     visitedArray[x][y] = true;
@@ -207,7 +207,7 @@ function countHostilesInSector(room, x, y, visitedArray) {
     var objectsInTile = room.lookAt(x, y);
     var walls = _.filter(objectsInTile, (s) => s.type == 'structure');
     if (walls.length > 0) {
-        return;
+        return result;
     }
 
     var HostileCreeps = _.filter(objectsInTile, (s) => s.type == creep && s.creep.my == false);
