@@ -23,7 +23,7 @@ var roleBuilder = {
                 }
             });
             if (target != undefined) {
-                console.log(creep + " is repairing");
+                //console.log(creep + " is repairing");
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
@@ -32,21 +32,21 @@ var roleBuilder = {
 
                 var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
                 if (target != undefined) {
-                    console.log(creep + " is building");
+                    //console.log(creep + " is building");
                     if (creep.build(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
                 } else {
-                    console.log(creep + " is walling");
+                    //console.log(creep + " is walling");
                     var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: (s) =>  s.structureType == STRUCTURE_RAMPART 
                     });
              
                     repairResult = creep.repair(target);
                     if (target == undefined) {
-                        console.log('no rampart to repair');
+                        //console.log('no rampart to repair');
                     } else {
-                        console.log("repairing " + target.structureType + " " + target + " " + repairResult);
+                        //console.log("repairing " + target.structureType + " " + target + " " + repairResult);
                         if (repairResult == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                         }

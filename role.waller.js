@@ -45,7 +45,7 @@ var roleWaller = {
                 }
                 creep.memory.target = targetStructure.id;
 
-            }
+            } else { console.log('no walls found wut')}
 
         }
     }
