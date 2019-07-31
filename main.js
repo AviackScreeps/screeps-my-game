@@ -4,6 +4,7 @@ var roleBuilder = require('role.builder');
 var roleRanged = require('role.ranged');
 var roleWaller = require('role.waller');
 var roleBaseMeleeDefender = require('role.baseMeleeDefender');
+var roleAttacker = require('role.attacker');
 
 module.exports.loop = function () {
    
@@ -101,12 +102,14 @@ module.exports.loop = function () {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var wallers = _.filter(Game.creeps, (creep) => creep.memory.role == 'waller');
+        var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attackers');
         //console.log('Harvesters: ' + harvesters.length);
         var amountOfHarvesters = 3;
         var minimumAmountOfUpgraders = 1;
         var amountOfUpgraders = 6;
         var amountOfBuilders = 3;
         var amountOfWallers = 2;
+        var amountOfAttackers = 1;
 
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
@@ -136,6 +139,12 @@ module.exports.loop = function () {
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
+        }
+        else if (attackers.lenfth < amountOfAttackers) {
+            var newName = 'NeOleg' + Game.time;
+            //console.log('Spawning new harvester: ' + newName);
+            Game.spawns['Spawn1'].spawnCreep([ATTACK, ATTACK, MOVE, MOVE], newName,
+                { memory: { role: 'attacker' } });
         }
         else if (wallers.length < amountOfWallers) {
             var newName = 'Waller' + Game.time;
@@ -174,6 +183,9 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'waller') {
             roleWaller.run(creep);
+        }
+        if (creep.memory.role == 'attacker') {
+            roleAttacker.run(creep);
         }
     }
 }
