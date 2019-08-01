@@ -10,6 +10,7 @@ var roleLongDistanceMiner = {
         if (creep.memory.longDistanceMining == undefined) {
             creep.memory.longDistanceMining = {};
             var miningLocations = _.filter(this.getMiningLocations(), (elem) => elem.maxMiners > 0);
+            console.log('miningLocations=' + miningLocations);
 
             if (miningLocations.length > 0) {
                 var location = _.first(miningLocations);
