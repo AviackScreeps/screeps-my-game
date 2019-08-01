@@ -66,38 +66,39 @@ var roleLongDistanceMiner = {
             }
         } else {
             console.log('1' + creep.memory.mining);
-            if (creep.memory.longDistanceMining.containerLocation == undefined) {
-                if (creep.room.name == 'W12S3') {
-                    console.log('3');
+            if (creep.room.name == 'W12S3') {
+                console.log('3');
+                if (creep.memory.longDistanceMining.containerLocation == undefined) {
                     var container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                         filter: (s) => s.structureType == STRUCTURE_CONTAINER
                     });
 
                     creep.memory.longDistanceMining.containerLocation = { x: container.pos.x, y: container.pos.y, room: container.room.name };
                     creep.memory.longDistanceMining.containerId = container.id;
-
-                    var containerPostion = new RoomPosition(creep.memory.longDistanceMining.containerLocation.x, creep.memory.longDistanceMining.containerLocation.y, creep.memory.longDistanceMining.containerLocation.roomName);
-                    if (creep.pos.isEqualTo(containerPostion)) {
-                        creep.drop(RESOURCE_ENERGY);
-                    } else {
-                        creep.moveTo(containerPostion);
-                    }
-
-                } else {
-                    console.log('4');
-                    if (creep.memory.longDistanceMining.exitHome == undefined) {
-                        console.log('5');
-                        var exitCode = creep.room.findExitTo('W12S3');
-                        var exitPos = creep.pos.findClosestByPath(exitCode);
-                        creep.memory.longDistanceMining.exitHome = { x: exitPos.x, y: exitPos.y };
-                    }
-                    console.log('6');
-                    creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.exitHome.x, creep.memory.longDistanceMining.exitHome.y, creep.room.name));
-                    
                 }
-                
+
+                var containerPostion = new RoomPosition(creep.memory.longDistanceMining.containerLocation.x, creep.memory.longDistanceMining.containerLocation.y, creep.memory.longDistanceMining.containerLocation.roomName);
+                if (creep.pos.isEqualTo(containerPostion)) {
+                    creep.drop(RESOURCE_ENERGY);
+                } else {
+                    creep.moveTo(containerPostion);
+                }
+
+            } else {
+                console.log('4');
+                if (creep.memory.longDistanceMining.exitHome == undefined) {
+                    console.log('5');
+                    var exitCode = creep.room.findExitTo('W12S3');
+                    var exitPos = creep.pos.findClosestByPath(exitCode);
+                    creep.memory.longDistanceMining.exitHome = { x: exitPos.x, y: exitPos.y };
+                }
+                console.log('6');
+                creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.exitHome.x, creep.memory.longDistanceMining.exitHome.y, creep.room.name));
+
             }
+
         }
+        
 
     }
     ,
