@@ -50,7 +50,7 @@ var roleLongDistanceMiner = {
         }
 
         if (creep.memory.mining == true) {
-            if (creep.room.name == creep.memory.longDistanceMining.room && creep.room.pos.getRangeTo(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y) <= 1) {
+            if (creep.room.name == creep.memory.longDistanceMining.room && creep.pos.getRangeTo(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y) <= 1) {
                 if (creep.memory.longDistanceMining.sourceId == undefined) {
                     creep.memory.longDistanceMining.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
                 }
