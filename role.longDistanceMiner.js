@@ -41,15 +41,18 @@ var roleLongDistanceMiner = {
         if (creep.memory.mining == undefined) {
             creep.memory.mining = true;
         }
-        console.log('' + (creep.memory.mining == true && creep.carry[RESOURCE_ENERGY] == creep.carryCapacity));
+        //console.log('' + (creep.memory.mining == true && creep.carry[RESOURCE_ENERGY] == creep.carryCapacity));
         if (creep.memory.mining == true && creep.carry[RESOURCE_ENERGY] == creep.carryCapacity) {
             creep.memory.mining == false;
         }
+        console.log(creep.memory.mining);
         if (creep.memory.mining == false && creep.carry[RESOURCE_ENERGY]  == 0) {
             creep.memory.mining == false;
         }
+        console.log(creep.memory.mining);
 
         if (creep.memory.mining == true) {
+            console.log('2' + creep.memory.mining);
             if (creep.room.name == creep.memory.longDistanceMining.room && creep.pos.getRangeTo(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y) <= 1) {
                 if (creep.memory.longDistanceMining.sourceId == undefined) {
                     creep.memory.longDistanceMining.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
@@ -62,8 +65,10 @@ var roleLongDistanceMiner = {
                 creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y, creep.memory.longDistanceMining.room));
             }
         } else {
+            console.log('1' + creep.memory.mining);
             if (creep.memory.longDistanceMining.containerLocation == undefined) {
                 if (creep.room.name == creep.memory.longDistanceMining.room) {
+                    console.log('3');
                     var container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                         filter: (s) => s.structureType == STRUCTURE_CONTAINER && (s.memory.owner == undefined || !Game.getObjectById(s.memory.owner))
                     });
@@ -79,11 +84,14 @@ var roleLongDistanceMiner = {
                     }
 
                 } else {
+                    console.log('4');
                     if (creep.memory.longDistanceMining.exitHome == undefined) {
+                        console.log('5');
                         var exitCode = creep.room.findExitTo('W12S3');
                         var exitPos = creep.pos.findClosestByPath(exitCode);
                         creep.memory.longDistanceMining.exitHome = { x: exitPos.x, y: exitPos.y };
                     }
+                    console.log('6');
                     creep.moveTo(new RoomPosition(creep.memory.exitHome.x, creep.memory.exitHome.y, creep.room.name));
                     
                 }
