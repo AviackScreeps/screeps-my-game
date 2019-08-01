@@ -27,6 +27,7 @@ var roleLongDistanceMiner = {
                     var exitPos = creep.pos.findClosestByPath(exitCode);
                     if (exitPos == undefined) {
                         //wait a turn
+                        creep.memory.longDistanceMining = undefined;
                         return;
                     }
                     creep.memory.longDistanceMining.exitToMining = { x: exitPos.x, y: exitPos.y};
