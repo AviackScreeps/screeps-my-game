@@ -10,8 +10,8 @@ var roleSupplyUpgrader = {
             var maxContainer = undefined;
             var maxEnergy = 0;
             for (let cont of containers) {
-                if (maxEnergy < cont.store) {
-                    maxEnergy = cont.store;
+                if (maxEnergy < cont.store[RESOURCE_ENERGY]) {
+                    maxEnergy = cont.store[RESOURCE_ENERGY];
                     maxContainer = cont;
                 }
             }
