@@ -8,6 +8,9 @@ var roleLongDistanceMiner = {
         return;
         //initialize memory
         if (creep.memory.miningLocation == undefined) {
+
+
+
             var yellowFlags = _.filter(Game.flags, (f) => f.color == COLOR_YELLOW && f.name == 'a3');
             var f = _.first(yellowFlags);
 

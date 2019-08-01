@@ -163,8 +163,8 @@ module.exports.loop = function () {
         var amountOfBuilders = 3;
         var amountOfWallers = 2;
         var amountOfAttackers = 0;
-        var amountOfLongDistanceMiners = 1;
-        var amountOfSupplyUpgraders = 1;
+        var amountOfLongDistanceMiners = 0;
+        var amountOfSupplyUpgraders = 0;
 
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
