@@ -7,7 +7,9 @@ var roleLongDistanceMiner = {
         //creep.moveTo(Game.flags.IdleFlag);
         //return;
         //initialize memory
+        creep.memory.longDistanceMining = undefined;
         console.log('' + creep + ' ' + creep.memory.longDistanceMining);
+
         if (creep.memory.longDistanceMining == undefined) {
             console.log('INIT MINER');
             creep.memory.longDistanceMining = {};
