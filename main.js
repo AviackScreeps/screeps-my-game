@@ -167,7 +167,7 @@ module.exports.loop = function () {
         var amountOfWallers = 2;
         var amountOfAttackers = 0;
         //var amountOfLongDistanceMiners = 0;
-        var amountOfSupplyUpgraders = 1;
+        var amountOfSupplyUpgraders = 2;
 
         var longDistanceMiningLocations = roleLongDistanceMiner.getMiningLocations();
         var longDistanceMinersRequired = 0;
