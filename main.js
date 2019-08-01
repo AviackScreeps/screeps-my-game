@@ -8,7 +8,6 @@ var roleAttacker = require('role.attacker');
 var roleLongDistanceMiner = require('role.longDistanceMiner');
 var roleSupplyUpgrader = require('role.supplyUpgrader');
 
-Memory.firstLoad = true;
 
 module.exports.loop = function () {
    
@@ -32,7 +31,7 @@ module.exports.loop = function () {
         }
     }
 
-    if (Memory.firstLoad) {
+    if (Memory.firstLoad == undefined) {
         for (i in Memory.creeps) {
             if (i.longDistanceMining != undefined) {
                 delete i.longDistanceMining;
