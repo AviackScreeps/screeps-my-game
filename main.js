@@ -163,7 +163,7 @@ module.exports.loop = function () {
         var amountOfBuilders = 3;
         var amountOfWallers = 2;
         var amountOfAttackers = 0;
-        var amountOfLongDistanceMiners = 3;
+        var amountOfLongDistanceMiners = 1;
         var amountOfSupplyUpgraders = 1;
 
         if (harvesters.length < amountOfHarvesters) {
