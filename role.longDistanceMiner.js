@@ -4,8 +4,8 @@ var roleLongDistanceMiner = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        creep.moveTo(Game.flags.IdleFlag);
-        return;
+        //creep.moveTo(Game.flags.IdleFlag);
+        //return;
         //initialize memory
         if (creep.memory.longDistanceMining == undefined) {
             var miningLocations = _.filter(getMiningLocations(), (elem) => elem.maxMiners > 0);
