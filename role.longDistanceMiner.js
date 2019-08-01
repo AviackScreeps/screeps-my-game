@@ -41,7 +41,7 @@ var roleLongDistanceMiner = {
         if (creep.memory.mining == undefined) {
             creep.memory.mining = true;
         }
-        console.log(creep.memory.mining == true && creep.carry == creep.carryCapacity);
+        console.log('' + (creep.memory.mining == true && creep.carry == creep.carryCapacity));
         if (creep.memory.mining == true && creep.carry == creep.carryCapacity) {
             creep.memory.mining == false;
         }
