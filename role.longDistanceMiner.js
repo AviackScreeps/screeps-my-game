@@ -11,7 +11,7 @@ var roleLongDistanceMiner = {
         console.log('' + creep + ' ' + creep.memory.longDistanceMining);
 
         if (creep.memory.longDistanceMining == undefined) {
-            //console.log('INIT MINER');
+            console.log('INIT MINER');
             creep.memory.longDistanceMining = {};
             var miningLocations = _.filter(this.getMiningLocations(), (elem) => elem.maxMiners > 0);
             //console.log('miningLocations=' + miningLocations);
@@ -27,6 +27,7 @@ var roleLongDistanceMiner = {
                     var exitPos = creep.pos.findClosestByPath(exitCode);
                     if (exitPos == undefined) {
                         //wait a turn
+                        console.log('WAIT A TURN');
                         creep.memory.longDistanceMining = undefined;
                         return;
                     }
