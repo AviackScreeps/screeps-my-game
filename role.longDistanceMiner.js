@@ -10,7 +10,8 @@ var roleLongDistanceMiner = {
             var yellowFlags = _.filter(Game.flags, (f) => f.color == COLOR_YELLOW && f.name == 'a3');
             var f = _.first(yellowFlags);
 
-            creep.memory.miningLocation = { x: f.pos.x, y: f.pos.y, room: f.room.name };
+            //creep.memory.miningLocation = { x: f.pos.x, y: f.pos.y, room: f.room.name };
+            creep.memory.miningLocation = { x: 19, y: 13, room: 'W13S3' };
         }
         if (creep.memory.mining == undefined) {
             creep.memory.mining = true;
