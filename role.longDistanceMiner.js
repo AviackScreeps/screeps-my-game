@@ -36,7 +36,7 @@ var roleLongDistanceMiner = {
         } else {
             if (creep.memory.containerLocation == undefined) {
                 if (creep.room.name == 'W12S3') {
-                    var container = creep.pos.findClosestByPath(FIND_STRUCTURES, , {
+                    var container = creep.pos.findClosestByPath(FIND_STRUCTURES,  {
                         filter: (s) => s.structureType == STRUCTURE_CONTAINER && (s.memory.owner == undefined || !Game.getObjectById(s.memory.owner))
                     }); 
 
