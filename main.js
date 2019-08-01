@@ -31,14 +31,7 @@ module.exports.loop = function () {
         }
     }
 
-    if (true) {
-        for (i in Memory.creeps) {
-            if (i.longDistanceMining != undefined) {
-                delete i.longDistanceMining;
-            }
-        }
-        Memory.firstLoad = false;
-    }
+   
 
     room = Game.rooms['W12S3'];
     //console.log(room);
