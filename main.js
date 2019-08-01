@@ -156,6 +156,7 @@ module.exports.loop = function () {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var wallers = _.filter(Game.creeps, (creep) => creep.memory.role == 'waller');
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
+        var SupplyUpgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'supplyUpgrader');
         //console.log('Harvesters: ' + harvesters.length);
         var amountOfHarvesters = 3;
         var minimumAmountOfUpgraders = 1;
@@ -163,8 +164,14 @@ module.exports.loop = function () {
         var amountOfBuilders = 3;
         var amountOfWallers = 2;
         var amountOfAttackers = 0;
-        var amountOfLongDistanceMiners = 0;
-        var amountOfSupplyUpgraders = 0;
+        //var amountOfLongDistanceMiners = 0;
+        var amountOfSupplyUpgraders = 1;
+
+        var longDistanceMiningLocations = roleLongDistanceMiner.getMiningLocations();
+        var longDistanceMinersRequired = 0;
+        for (let i of longDistanceMiningLocations) {
+            longDistanceMinersRequired += i.maxMiners;
+        }
 
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
@@ -178,13 +185,14 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
-        else if (wallers.length < amountOfLongDistanceMiners) {
+        else if (longDistanceMinersRequired > 0) {
+            console.log('required ' + longDistanceMinersRequired + 'long distance miners');
             var newName = 'LongDistanceMiner' + Game.time;
 
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'longDistanceMiner' } });
         }
-        else if (wallers.length < amountOfSupplyUpgraders) {
+        else if (SupplyUpgraders.length < amountOfSupplyUpgraders) {
             var newName = 'SupplyUpgrader' + Game.time;
 
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,

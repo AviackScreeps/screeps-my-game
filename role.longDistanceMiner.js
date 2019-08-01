@@ -7,15 +7,23 @@ var roleLongDistanceMiner = {
         creep.moveTo(Game.flags.IdleFlag);
         return;
         //initialize memory
-        if (creep.memory.miningLocation == undefined) {
+        if (creep.memory.longDistanceMining == undefined) {
+            var miningLocations = _.filter(getMiningLocations(), (elem) => elem.maxMiners > 0);
 
+            if (miningLocations.length > 0) {
+                var location = _.first(miningLocations);
+                creep.memory.longDistanceMining.room = location.room;
+                creep.memory.longDistanceMining.x = location.x;
+                creep.memory.longDistanceMining.y = location.y;
 
-
-            var yellowFlags = _.filter(Game.flags, (f) => f.color == COLOR_YELLOW && f.name == 'a3');
-            var f = _.first(yellowFlags);
-
-            //creep.memory.miningLocation = { x: f.pos.x, y: f.pos.y, room: f.room.name };
-            creep.memory.miningLocation = { x: 19, y: 13, room: 'W13S3' };
+                if (creep.room.name != location.room) {
+                    var exitCode = creep.room.findExitTo(location.room);
+                    var exitPos = creep.pos.findClosestByPath(exitCode);
+                    creep.memory.longDistanceMining.exitToMining = { x: exitPos.x, y: exitPos.y};
+                }
+            } else {
+                creep.moveTo(Game.flags.idleFlag)
+            }            
         }
         if (creep.memory.mining == undefined) {
             creep.memory.mining = true;
@@ -29,27 +37,29 @@ var roleLongDistanceMiner = {
         }
 
         if (creep.memory.mining == true) {
-            if (creep.room.name == creep.memory.miningLocation.room && creep.room.pos.getRangeTo(creep.memory.miningLocation.x, creep.memory.miningLocation.y) <= 1) {
-                if (creep.memory.sourceId == undefined) {
-                    creep.memory.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
+            if (creep.room.name == creep.memory.longDistanceMining.room && creep.room.pos.getRangeTo(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y) <= 1) {
+                if (creep.memory.longDistanceMining.sourceId == undefined) {
+                    creep.memory.longDistanceMining.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;
                 }
-                var source = Game.getObjectById(creep.memory.sourceId);
+                var source = Game.getObjectById(creep.memory.longDistanceMining.sourceId);
                 creep.harvest(source);
+            } else if (creep.room.name == creep.memory.longDistanceMining.room) {
+                creep.moveTo(new RoomPosition(creep.memory.exitToMining.x, creep.memory.exitToMining.y, creep.room.name));
             } else {
-                creep.moveTo(new RoomPosition(creep.memory.miningLocation.x, creep.memory.miningLocation.y, creep.memory.miningLocation.roomName));
+                creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y, creep.memory.longDistanceMining.room));
             }
         } else {
-            if (creep.memory.containerLocation == undefined) {
-                if (creep.room.name == 'W12S3') {
+            if (creep.memory.longDistanceMining.containerLocation == undefined) {
+                if (creep.room.name == creep.memory.longDistanceMining.room) {
                     var container = creep.pos.findClosestByPath(FIND_STRUCTURES,  {
                         filter: (s) => s.structureType == STRUCTURE_CONTAINER && (s.memory.owner == undefined || !Game.getObjectById(s.memory.owner))
                     }); 
 
-                    creep.memory.containerLocation = { x: container.pos.x, y: container.pos.y, room: container.room.name };
-                    creep.memory.containerId = container.id;
+                    creep.memory.longDistanceMining.containerLocation = { x: container.pos.x, y: container.pos.y, room: container.room.name };
+                    creep.memory.longDistanceMining.containerId = container.id;
                     
                 }
-                var containerPostion = new RoomPosition(creep.memory.containerLocation.x, creep.memory.containerLocation.y, creep.memory.containerLocation.roomName);
+                var containerPostion = new RoomPosition(creep.memory.longDistanceMining.containerLocation.x, creep.memory.longDistanceMining.containerLocation.y, creep.memory.longDistanceMining.containerLocation.roomName);
                 if (creep.pos.isEqualTo(containerPostion)) {
                     creep.drop(RESOURCE_ENERGY);
                 } else {
@@ -58,6 +68,21 @@ var roleLongDistanceMiner = {
             }
         }
 
+    }
+    ,
+    getMiningLocations: function () {
+        var locations = [{ room: 'W13S3', x: 19, y: 3, maxMiners: 3 }, { room: 'W13S3', x: 6, y: 45, maxMiners: 2 }];;
+
+        var assignedMiners = _.filter(Memory.creeps, (elem) => elem.longDistanceMining != undefined);
+
+        for (let l of locations) {
+            
+            minersInLocation = _.filter(assignedMiners, (elem) => elem.memory.longDistanceMining.x == l.x && elem.memory.longDistanceMining.y == l.y && elem.memory.longDistanceMining.room == l.room);
+            l.maxMiners -= minersInLocation.length;
+
+        }
+
+        return locations;
     }
 };
 
