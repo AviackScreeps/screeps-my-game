@@ -7,7 +7,7 @@ var roleLongDistanceMiner = {
         //creep.moveTo(Game.flags.IdleFlag);
         //return;
         //initialize memory
-        //creep.memory.longDistanceMining = undefined;
+        creep.memory.longDistanceMining = undefined;
         console.log('' + creep + ' ' + creep.memory.longDistanceMining);
 
         if (creep.memory.longDistanceMining == undefined) {
@@ -25,6 +25,7 @@ var roleLongDistanceMiner = {
                 if (creep.room.name != location.room) {
                     var exitCode = creep.room.findExitTo(location.room);
                     var exitPos = creep.pos.findClosestByPath(exitCode);
+                    console.log('INIT MINER');
                     if (exitPos == undefined) {
                         //wait a turn
                         console.log('WAIT A TURN');
