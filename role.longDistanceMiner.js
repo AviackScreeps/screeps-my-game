@@ -45,11 +45,11 @@ var roleLongDistanceMiner = {
         if (creep.memory.mining == true && creep.carry[RESOURCE_ENERGY] == creep.carryCapacity) {
             creep.memory.mining = false;
         }
-        console.log(creep.memory.mining);
+        //console.log(creep.memory.mining);
         if (creep.memory.mining == false && creep.carry[RESOURCE_ENERGY]  == 0) {
             creep.memory.mining = true;
         }
-        console.log(creep.memory.mining);
+        //console.log(creep.memory.mining);
 
         if (creep.memory.mining == true) {
             console.log('2' + creep.memory.mining);
@@ -65,9 +65,9 @@ var roleLongDistanceMiner = {
                 creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y, creep.memory.longDistanceMining.room));
             }
         } else {
-            console.log('1' + creep.memory.mining);
+            //console.log('1' + creep.memory.mining);
             if (creep.room.name == 'W12S3') {
-                console.log('3');
+                //console.log('3');
                 if (creep.memory.longDistanceMining.containerLocation == undefined) {
                     var container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                         filter: (s) => s.structureType == STRUCTURE_CONTAINER
@@ -85,14 +85,14 @@ var roleLongDistanceMiner = {
                 }
 
             } else {
-                console.log('4');
+                //console.log('4');
                 if (creep.memory.longDistanceMining.exitHome == undefined) {
-                    console.log('5');
+                    //console.log('5');
                     var exitCode = creep.room.findExitTo('W12S3');
                     var exitPos = creep.pos.findClosestByPath(exitCode);
                     creep.memory.longDistanceMining.exitHome = { x: exitPos.x, y: exitPos.y };
                 }
-                console.log('6');
+                //console.log('6');
                 creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.exitHome.x, creep.memory.longDistanceMining.exitHome.y, creep.room.name));
 
             }

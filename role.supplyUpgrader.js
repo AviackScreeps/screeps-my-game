@@ -16,7 +16,9 @@ var roleSupplyUpgrader = {
                 }
             }
             if (maxContainer != undefined) {
-                if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                var result = creep.withdraw(container, RESOURCE_ENERGY);
+                console.log(result);
+                if (result == ERR_NOT_IN_RANGE) {
                     creep.moveTo(container);
                 }
             } else {
