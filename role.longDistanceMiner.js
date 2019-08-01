@@ -41,11 +41,11 @@ var roleLongDistanceMiner = {
         if (creep.memory.mining == undefined) {
             creep.memory.mining = true;
         }
-        console.log('' + creep.carry + ' ' + creep.carryCapacity);
-        if (creep.memory.mining == true && creep.carry == creep.carryCapacity) {
+
+        if (creep.memory.mining == true && creep.carry[RESOURCE_ENERGY] == creep.carryCapacity) {
             creep.memory.mining == false;
         }
-        if (creep.memory.mining == false && creep.carry == 0) {
+        if (creep.memory.mining == false && creep.carry[RESOURCE_ENERGY]  == 0) {
             creep.memory.mining == false;
         }
 
