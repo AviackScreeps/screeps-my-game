@@ -5,6 +5,8 @@ var roleRanged = require('role.ranged');
 var roleWaller = require('role.waller');
 var roleBaseMeleeDefender = require('role.baseMeleeDefender');
 var roleAttacker = require('role.attacker');
+var roleLongDistanceMiner = require('role.longDistanceMiner');
+var roleSupplyUpgrader = require('role.supplyUpgrader');
 
 module.exports.loop = function () {
    
@@ -161,6 +163,8 @@ module.exports.loop = function () {
         var amountOfBuilders = 3;
         var amountOfWallers = 2;
         var amountOfAttackers = 0;
+        var amountOfLongDistanceMiners = 3;
+        var amountOfSupplyUpgraders = 1;
 
         if (harvesters.length < amountOfHarvesters) {
             var newName = 'Harvester' + Game.time;
@@ -199,6 +203,18 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'waller' } });
         }
+        else if (wallers.length < amountOfLongDistanceMiners) {
+            var newName = 'LongDistanceMiner' + Game.time;
+            
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
+                { memory: { role: 'longDistanceMiner' } });
+        }
+        else if (wallers.length < amountOfSupplyUpgraders) {
+            var newName = 'SupplyUpgrader' + Game.time;
+            
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+                { memory: { role: 'supplyUpgrader' } });
+        }
 
         if (Game.spawns['Spawn1'].spawning) {
             var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
@@ -233,6 +249,12 @@ module.exports.loop = function () {
         }
         if (creep.memory.role == 'attacker') {
             roleAttacker.run(creep);
+        }
+        if (creep.memory.role == 'supplyUpgrader') {
+            roleSupplyUpgrader.run(creep);
+        }
+        if (creep.memory.role == 'longDistanceMiner') {
+            roleLongDistanceMiner.run(creep);
         }
     }
 
