@@ -38,6 +38,7 @@ module.exports.loop = function () {
                 delete i.longDistanceMining;
             }
         }
+        Memory.firstLoad = false;
     }
 
     room = Game.rooms['W12S3'];
