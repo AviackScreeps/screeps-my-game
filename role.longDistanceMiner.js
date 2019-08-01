@@ -11,10 +11,10 @@ var roleLongDistanceMiner = {
         console.log('' + creep + ' ' + creep.memory.longDistanceMining);
 
         if (creep.memory.longDistanceMining == undefined) {
-            console.log('INIT MINER');
+            //console.log('INIT MINER');
             creep.memory.longDistanceMining = {};
             var miningLocations = _.filter(this.getMiningLocations(), (elem) => elem.maxMiners > 0);
-            console.log('miningLocations=' + miningLocations);
+            //console.log('miningLocations=' + miningLocations);
 
             if (miningLocations.length > 0) {
                 var location = _.first(miningLocations);
@@ -50,7 +50,7 @@ var roleLongDistanceMiner = {
                 var source = Game.getObjectById(creep.memory.longDistanceMining.sourceId);
                 creep.harvest(source);
             } else if (creep.room.name != creep.memory.longDistanceMining.room) {
-                creep.moveTo(new RoomPosition(creep.memory.exitToMining.x, creep.memory.exitToMining.y, creep.room.name));
+                creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.exitToMining.x, creep.memory.longDistanceMining.exitToMining.y, creep.room.name));
             } else {
                 creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y, creep.memory.longDistanceMining.room));
             }
