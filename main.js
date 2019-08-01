@@ -178,6 +178,18 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
+        else if (wallers.length < amountOfLongDistanceMiners) {
+            var newName = 'LongDistanceMiner' + Game.time;
+
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
+                { memory: { role: 'longDistanceMiner' } });
+        }
+        else if (wallers.length < amountOfSupplyUpgraders) {
+            var newName = 'SupplyUpgrader' + Game.time;
+
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+                { memory: { role: 'supplyUpgrader' } });
+        }
         else if (builders.length < amountOfBuilders) {
             var newName = 'Builder' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
@@ -203,18 +215,7 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'waller' } });
         }
-        else if (wallers.length < amountOfLongDistanceMiners) {
-            var newName = 'LongDistanceMiner' + Game.time;
-            
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
-                { memory: { role: 'longDistanceMiner' } });
-        }
-        else if (wallers.length < amountOfSupplyUpgraders) {
-            var newName = 'SupplyUpgrader' + Game.time;
-            
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
-                { memory: { role: 'supplyUpgrader' } });
-        }
+        
 
         if (Game.spawns['Spawn1'].spawning) {
             var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
