@@ -4,7 +4,8 @@ var roleLongDistanceMiner = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-
+        creep.moveTo(Game.flags.IdleFlag);
+        return;
         //initialize memory
         if (creep.memory.miningLocation == undefined) {
             var yellowFlags = _.filter(Game.flags, (f) => f.color == COLOR_YELLOW && f.name == 'a3');
