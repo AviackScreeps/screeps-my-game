@@ -16,10 +16,10 @@ var roleSupplyUpgrader = {
                 }
             }
             if (maxContainer != undefined) {
-                var result = creep.withdraw(container, RESOURCE_ENERGY);
+                var result = creep.withdraw(maxContainer, RESOURCE_ENERGY);
                 console.log(result);
                 if (result == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container);
+                    creep.moveTo(maxContainer);
                 }
             } else {
                 var tomb = creep.pos.findClosestByPath(FIND_TOMBSTONES, { filter: (s) => s.store[RESOURCE_ENERGY]  > 0 });
