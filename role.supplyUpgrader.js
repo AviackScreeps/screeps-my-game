@@ -5,7 +5,7 @@ var roleSupplyUpgrader = {
     /** @param {Creep} creep **/
     run: function (creep) {
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
-            var containers = creep.room.find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store > 0 })
+            var containers = creep.room.find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0 })
 
             var maxContainer = undefined;
             var maxEnergy = 0;
