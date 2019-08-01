@@ -31,7 +31,7 @@ module.exports.loop = function () {
         }
     }
 
-    if (Memory.firstLoad == undefined) {
+    if (true) {
         for (i in Memory.creeps) {
             if (i.longDistanceMining != undefined) {
                 delete i.longDistanceMining;
