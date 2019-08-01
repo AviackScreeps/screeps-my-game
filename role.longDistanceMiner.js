@@ -70,7 +70,7 @@ var roleLongDistanceMiner = {
                 if (creep.room.name == 'W12S3') {
                     console.log('3');
                     var container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                        filter: (s) => s.structureType == STRUCTURE_CONTAINER && (s.memory.owner == undefined || !Game.getObjectById(s.memory.owner))
+                        filter: (s) => s.structureType == STRUCTURE_CONTAINER)
                     });
 
                     creep.memory.longDistanceMining.containerLocation = { x: container.pos.x, y: container.pos.y, room: container.room.name };
