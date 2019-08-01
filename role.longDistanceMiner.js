@@ -88,7 +88,7 @@ var roleLongDistanceMiner = {
 
         for (let l of locations) {
             
-            minersInLocation = _.filter(assignedMiners, (elem) => elem.memory.longDistanceMining.x == l.x && elem.memory.longDistanceMining.y == l.y && elem.memory.longDistanceMining.room == l.room);
+            minersInLocation = _.filter(assignedMiners, (elem) => elem.longDistanceMining.x == l.x && elem.longDistanceMining.y == l.y && elem.longDistanceMining.room == l.room);
             l.maxMiners -= minersInLocation.length;
 
         }
