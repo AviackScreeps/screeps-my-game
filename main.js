@@ -23,7 +23,7 @@ module.exports.loop = function () {
         for (var name in Memory.creeps) {
             if (!Game.creeps[name]) {
                 delete Memory.creeps[name];
-                console.log('Clearing non-existing creep memory:', name);
+                //console.log('Clearing non-existing creep memory:', name);
             }
         }
     }
@@ -50,6 +50,12 @@ module.exports.loop = function () {
 
         var numOfDefenders = 0;
         if (Memory.defenceParameters.LeftSectorEnemies > 0) {
+            numOfDefenders += 2;
+        }
+        if (Memory.defenceParameters.RightSectorEnemies > 0) {
+            numOfDefenders += 2;
+        }
+        if (Memory.defenceParameters.UpperSectorEnemies > 0) {
             numOfDefenders += 1;
         }
         if (Memory.defenceParameters.BaseEnemies > 0) {
@@ -82,6 +88,24 @@ module.exports.loop = function () {
                 }
                 //freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
             }
+            if (Memory.defenceParameters.RightSectorEnemies > 0) {
+                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 30, 44, 46, 41, true);
+                for (let s of buildings) {
+                    if (s.structureType == STRUCTURE_RAMPART) {
+                        freeRamparts[freeRamparts.length - 1] = s;
+                    }
+                }
+                //freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
+            }
+            if (Memory.defenceParameters.UpperSectorEnemies > 0) {
+                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 15, 23, 17, 27, true);
+                for (let s of buildings) {
+                    if (s.structureType == STRUCTURE_RAMPART) {
+                        freeRamparts[freeRamparts.length - 1] = s;
+                    }
+                }
+                //freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
+            }
             for (let creep of defenders) {
                 if (creep.memory.rampart == undefined) {
                     creep.memory.rampart = _.first(freeRamparts).id;
@@ -93,6 +117,15 @@ module.exports.loop = function () {
                     var hostilesInrange = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 1);
                     if (hostilesInrange.length > 0) {
                         creep.attack(_.first(hostilesInrange));
+                    } else {
+                        if (creep.memory.waitForIt == undefined) {
+                            creep.memory.waitForIt = 0;
+                        }
+                        creep.memory.waitForIt++;
+
+                        if (creep.memory.waitForIt > 5) {
+                            creep.moveTo(creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS));
+                        }
                     }
                 } else {
                     creep.moveTo(rampart);
