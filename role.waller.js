@@ -40,6 +40,11 @@ var roleWaller = {
                         minHits = s.hits / s.hitsMax;
                         targetStructure = s;
                     }
+                    if (s.hits < 10000) {
+                        minHits = -1;
+                        targetStructure = s;
+                        break;
+                    }
                 }
                 //targetStructure = _.minBy(targets, (s) => (s.hits / s.hitsMax));
             }
