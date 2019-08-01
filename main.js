@@ -33,7 +33,7 @@ module.exports.loop = function () {
     }
 
     if (Memory.firstLoad) {
-        for (i of Memory.creeps) {
+        for (i in Memory.creeps) {
             if (i.longDistanceMining != undefined) {
                 delete i.longDistanceMining;
             }
