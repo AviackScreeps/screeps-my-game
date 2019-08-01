@@ -92,7 +92,7 @@ var roleLongDistanceMiner = {
                         creep.memory.longDistanceMining.exitHome = { x: exitPos.x, y: exitPos.y };
                     }
                     console.log('6');
-                    creep.moveTo(new RoomPosition(creep.memory.exitHome.x, creep.memory.exitHome.y, creep.room.name));
+                    creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.exitHome.x, creep.memory.longDistanceMining.exitHome.y, creep.room.name));
                     
                 }
                 
