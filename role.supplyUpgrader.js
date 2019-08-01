@@ -20,7 +20,7 @@ var roleSupplyUpgrader = {
                     creep.moveTo(container);
                 }
             } else {
-                var tomb = creep.pos.findClosestByPath(FIND_TOMBSTONES, { filter: (s) => s.store > 0 });
+                var tomb = creep.pos.findClosestByPath(FIND_TOMBSTONES, { filter: (s) => s.store[RESOURCE_ENERGY]  > 0 });
                 if (tomb != undefined) {
                     if (creep.withdraw(tomb, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(tomb);
