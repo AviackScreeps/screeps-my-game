@@ -44,7 +44,7 @@ var roleLongDistanceMiner = {
                 }
                 var source = Game.getObjectById(creep.memory.longDistanceMining.sourceId);
                 creep.harvest(source);
-            } else if (creep.room.name == creep.memory.longDistanceMining.room) {
+            } else if (creep.room.name != creep.memory.longDistanceMining.room) {
                 creep.moveTo(new RoomPosition(creep.memory.exitToMining.x, creep.memory.exitToMining.y, creep.room.name));
             } else {
                 creep.moveTo(new RoomPosition(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y, creep.memory.longDistanceMining.room));
