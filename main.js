@@ -259,8 +259,7 @@ module.exports.loop = function () {
             creep.memory.role = role;
         }
 
-        console.log(creep.memory.role);
-        console.log(creep.memory.role.toLowerCase());
+        creep.memory.role = creep.memory.role.toLowerCase();
 
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
@@ -280,10 +279,10 @@ module.exports.loop = function () {
         if (creep.memory.role == 'attacker') {
             roleAttacker.run(creep);
         }
-        if (creep.memory.role.toLowerCase() == 'supplyupgrader') {
+        if (creep.memory.role == 'supplyupgrader') {
             roleSupplyUpgrader.run(creep);
         }
-        if (creep.memory.role.toLowerCase() == 'longdistanceminer') {
+        if (creep.memory.role == 'longdistanceminer') {
             roleLongDistanceMiner.run(creep);
         }
     }
