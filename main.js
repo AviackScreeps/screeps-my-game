@@ -244,7 +244,19 @@ module.exports.loop = function () {
             delete creep.memory.rampart;    
         }
 
-        console.log('act ' + creep)
+        if (creep.memory.role == undefined) {
+            var role = '';
+            var numbers = '1234567890';
+            for (c of creep.name) {
+                if (numbers.search(c) == -1) {
+                    role += c;
+                }
+                
+            }
+            role = role.toLowerCase;
+
+            creep.memory.role = role;
+        }
 
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
@@ -264,10 +276,10 @@ module.exports.loop = function () {
         if (creep.memory.role == 'attacker') {
             roleAttacker.run(creep);
         }
-        if (creep.memory.role == 'supplyUpgrader') {
+        if (creep.memory.role.toLowerCase() == 'supplyupgrader') {
             roleSupplyUpgrader.run(creep);
         }
-        if (creep.memory.role == 'longDistanceMiner') {
+        if (creep.memory.role.toLowerCase() == 'longdistanceminer') {
             roleLongDistanceMiner.run(creep);
         }
     }

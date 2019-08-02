@@ -12,6 +12,8 @@ var roleSupplyUpgrader = {
         if (creep.memory.previousPosition.i > 10) {
             delete Memory.creeps[creep.name];
         }
+
+ 
         console.log(creep.name);
 
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
