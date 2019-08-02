@@ -158,7 +158,7 @@ module.exports.loop = function () {
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var wallers = _.filter(Game.creeps, (creep) => creep.memory.role == 'waller');
         var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
-        var SupplyUpgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'supplyUpgrader');
+        var SupplyUpgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'supplyupgrader');
         //console.log('Harvesters: ' + harvesters.length);
         var amountOfHarvesters = 3;
         var minimumAmountOfUpgraders = 1;
@@ -206,13 +206,13 @@ module.exports.loop = function () {
             var newName = 'LongDistanceMiner' + Game.time;
 
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
-                { memory: { role: 'longDistanceMiner' } });
+                { memory: { role: 'longdistanceminer' } });
         }
         else if (SupplyUpgraders.length < amountOfSupplyUpgraders) {
             var newName = 'SupplyUpgrader' + Game.time;
 
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
-                { memory: { role: 'supplyUpgrader' } });
+                { memory: { role: 'supplyupgrader' } });
         }
         else if (attackers.length < amountOfAttackers) {
             var newName = 'NeOleg' + Game.time;
