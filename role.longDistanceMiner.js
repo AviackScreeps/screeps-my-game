@@ -24,7 +24,7 @@ var roleLongDistanceMiner = {
 
                 if (creep.room.name != location.room) {
                     var exitCode = creep.room.findExitTo(location.room);
-                    var exitPos = creep.pos.findClosestByPath(exitCode);
+                    var exitPos = creep.pos.findClosestByPath(exitCode, {ignoreCreeps: true});
                     console.log('INIT MINER');
                     if (exitPos == undefined) {
                         //wait a turn
@@ -89,7 +89,7 @@ var roleLongDistanceMiner = {
                 if (creep.memory.longDistanceMining.exitHome == undefined) {
                     //console.log('5');
                     var exitCode = creep.room.findExitTo('W12S3');
-                    var exitPos = creep.pos.findClosestByPath(exitCode);
+                    var exitPos = creep.pos.findClosestByPath(exitCode, { ignoreCreeps: true });
                     creep.memory.longDistanceMining.exitHome = { x: exitPos.x, y: exitPos.y };
                 }
                 //console.log('6');
