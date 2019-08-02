@@ -8,7 +8,7 @@ var roleLongDistanceMiner = {
         //return;
         //initialize memory
         //creep.memory.longDistanceMining = undefined;
-        console.log('' + creep + ' ' + creep.memory.longDistanceMining);
+        //console.log('' + creep + ' ' + creep.memory.longDistanceMining);
 
         if (creep.memory.longDistanceMining == undefined) {
             console.log('INIT MINER');
@@ -52,7 +52,7 @@ var roleLongDistanceMiner = {
         //console.log(creep.memory.mining);
 
         if (creep.memory.mining == true) {
-            console.log('2' + creep.memory.mining);
+            //console.log('2' + creep.memory.mining);
             if (creep.room.name == creep.memory.longDistanceMining.room && creep.pos.getRangeTo(creep.memory.longDistanceMining.x, creep.memory.longDistanceMining.y) <= 1) {
                 if (creep.memory.longDistanceMining.sourceId == undefined) {
                     creep.memory.longDistanceMining.sourceId = creep.pos.findClosestByRange(FIND_SOURCES).id;

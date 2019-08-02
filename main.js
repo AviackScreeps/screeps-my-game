@@ -187,19 +187,7 @@ module.exports.loop = function () {
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
-        else if (longDistanceMinersRequired > 0) {
-            console.log('required ' + longDistanceMinersRequired + 'long distance miners');
-            var newName = 'LongDistanceMiner' + Game.time;
 
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
-                { memory: { role: 'longDistanceMiner' } });
-        }
-        else if (SupplyUpgraders.length < amountOfSupplyUpgraders) {
-            var newName = 'SupplyUpgrader' + Game.time;
-
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
-                { memory: { role: 'supplyUpgrader' } });
-        }
         else if (builders.length < amountOfBuilders) {
             var newName = 'Builder' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
@@ -212,6 +200,19 @@ module.exports.loop = function () {
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
+        }
+        else if (longDistanceMinersRequired > 0) {
+            console.log('required ' + longDistanceMinersRequired + 'long distance miners');
+            var newName = 'LongDistanceMiner' + Game.time;
+
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
+                { memory: { role: 'longDistanceMiner' } });
+        }
+        else if (SupplyUpgraders.length < amountOfSupplyUpgraders) {
+            var newName = 'SupplyUpgrader' + Game.time;
+
+            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+                { memory: { role: 'supplyUpgrader' } });
         }
         else if (attackers.length < amountOfAttackers) {
             var newName = 'NeOleg' + Game.time;
