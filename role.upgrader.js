@@ -5,12 +5,12 @@ var roleUpgrader = {
     /** @param {Creep} creep **/
     run: function (creep) {
 
-        if (creep.room.name != 'W12S3') {
-            var exitCode = creep.room.findExitTo('W12S3');
-            var exitPos = creep.pos.findClosestByPath(exitCode);
-            creep.moveTo(exitPos);
-            return;
-        }
+        //if (creep.room.name != 'W12S3') {
+        //    var exitCode = creep.room.findExitTo('W12S3');
+        //    var exitPos = creep.pos.findClosestByPath(exitCode);
+        //    creep.moveTo(exitPos);
+        //    return;
+        //}
 
 
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
@@ -65,8 +65,8 @@ var roleUpgrader = {
                 creep.memory.transfering = false;
             } else {
                 creep.memory.transfering = true;
-                if (creep.transfer(creep.room.controller, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#bdbdbd' } });
+                if (creep.transfer(Game.rooms['W12S3'].controller, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(Game.rooms['W12S3'].controller, { visualizePathStyle: { stroke: '#bdbdbd' } });
                 }
             }
         }
