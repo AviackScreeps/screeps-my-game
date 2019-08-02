@@ -198,7 +198,7 @@ module.exports.loop = function () {
         else if (upgraders.length < amountOfUpgraders) {
             var newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
         else if (longDistanceMinersRequired > 0) {
@@ -211,7 +211,7 @@ module.exports.loop = function () {
         else if (SupplyUpgraders.length < amountOfSupplyUpgraders) {
             var newName = 'SupplyUpgrader' + Game.time;
 
-            Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
+            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'supplyUpgrader' } });
         }
         else if (attackers.length < amountOfAttackers) {
