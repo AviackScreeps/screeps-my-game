@@ -271,7 +271,7 @@ module.exports.loop = function () {
     }
 
     if (Memory.attackByTower == true) {
-        console.log('towers attacking anyway');
+        //console.log('towers attacking anyway');
         var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
 
         for (let tower of towers) {
