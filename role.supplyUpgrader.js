@@ -40,6 +40,10 @@ var roleSupplyUpgrader = {
                     }
                     creep.moveByPath(creep.memory.pathToContainer);
                 }
+                else {
+                    creep.memory.targetContainerId = undefined;
+                    creep.memory.pathToContainer = undefined;
+                }
             } else {
                 var tomb = creep.pos.findClosestByPath(FIND_TOMBSTONES, { filter: (s) => s.store[RESOURCE_ENERGY]  > 0 });
                 if (tomb != undefined) {
