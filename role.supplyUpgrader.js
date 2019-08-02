@@ -12,9 +12,11 @@ var roleSupplyUpgrader = {
         if (creep.memory.previousPosition.i > 10) {
             delete Memory.creeps[creep.name];
         }
+        console.log(creep.name);
 
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
 
+            console.log('find container');
             var targetContainer = undefined;
             if (creep.memory.targetContainerId == undefined) {
 
@@ -30,15 +32,18 @@ var roleSupplyUpgrader = {
                 //}
 
                 if (targetContainer != undefined) {
+                    console.log('container found');
                     creep.memory.targetContainerId = targetContainer.id;
                 }
             }
             else {
+
                 targetContainer = Game.getObjectById(creep.memory.targetContainerId);
             }
 
 
             if (targetContainer != undefined) {
+                console.log('go to container');
                 var result = creep.withdraw(targetContainer, RESOURCE_ENERGY);
                 //console.log(result);
                 if (result == ERR_NOT_IN_RANGE) {
