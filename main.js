@@ -244,6 +244,8 @@ module.exports.loop = function () {
             delete creep.memory.rampart;    
         }
 
+        console.log('act ' + creep)
+
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
