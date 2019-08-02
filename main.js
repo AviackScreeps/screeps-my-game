@@ -245,6 +245,7 @@ module.exports.loop = function () {
         }
 
         if (creep.memory.role == undefined) {
+            console.log('undefined role');
             var role = '';
             var numbers = '1234567890';
             for (c of creep.name) {
@@ -253,12 +254,13 @@ module.exports.loop = function () {
                 }
                 
             }
-            role.toLowerCase();
+            role = role.toLowerCase();
 
             creep.memory.role = role;
         }
 
-        creep.memory.role.toLowerCase();
+        console.log(creep.memory.role);
+        console.log(creep.memory.role.toLowerCase());
 
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
@@ -278,10 +280,10 @@ module.exports.loop = function () {
         if (creep.memory.role == 'attacker') {
             roleAttacker.run(creep);
         }
-        if (creep.memory.role == 'supplyupgrader') {
+        if (creep.memory.role.toLowerCase() == 'supplyupgrader') {
             roleSupplyUpgrader.run(creep);
         }
-        if (creep.memory.role == 'longdistanceminer') {
+        if (creep.memory.role.toLowerCase() == 'longdistanceminer') {
             roleLongDistanceMiner.run(creep);
         }
     }
