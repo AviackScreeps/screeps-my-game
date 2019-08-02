@@ -20,10 +20,9 @@ var roleUpgrader = {
                 //    }
                 //}
 
-                //if (maxContainer != undefined) {
-                //    creep.memory.targetContainerId = maxContainer.id;
-                //}
-                //targetContainer = maxContainer;
+                if (targetContainer != undefined) {
+                    creep.memory.targetContainerId = targetContainer.id;
+                }
             }
             else {
                 targetContainer = Game.getObjectById(creep.memory.targetContainerId);

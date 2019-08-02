@@ -9,21 +9,20 @@ var roleSupplyUpgrader = {
             var targetContainer = undefined;
             if (creep.memory.targetContainerId == undefined) {
 
-                var containers = creep.room.find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0 })
+                var targetContainer = creep.pos.findClosestByPath(FIND_STRUCTURES, { ignoreCreeps: true, filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= creep.carryCapacity })
 
-                var maxContainer = undefined;
-                var maxEnergy = 0;
-                for (let cont of containers) {
-                    if (maxEnergy < cont.store[RESOURCE_ENERGY]) {
-                        maxEnergy = cont.store[RESOURCE_ENERGY];
-                        maxContainer = cont;
-                    }
-                }
+                //var maxContainer = undefined;
+                //var maxEnergy = 0;
+                //for (let cont of containers) {
+                //    if (maxEnergy < cont.store[RESOURCE_ENERGY]) {
+                //        maxEnergy = cont.store[RESOURCE_ENERGY];
+                //        maxContainer = cont;
+                //    }
+                //}
 
-                if (maxContainer != undefined) {
-                    creep.memory.targetContainerId = maxContainer.id;
+                if (targetContainer != undefined) {
+                    creep.memory.targetContainerId = targetContainer.id;
                 }
-                targetContainer = maxContainer;
             }
             else {
                 targetContainer = Game.getObjectById(creep.memory.targetContainerId);
