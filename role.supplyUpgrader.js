@@ -4,6 +4,15 @@ var roleSupplyUpgrader = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
+        if (creep.memory.previousPosition = undefined) {
+            creep.memory.previousPosition = { x: creep.pos.x, y: creep.pos.y, i: 0 };
+        } else {
+            creep.memory.previousPosition.i++;
+        }
+        if (creep.memory.previousPosition.i > 10) {
+            delete Memory.creeps[creep.name];
+        }
+
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
 
             var targetContainer = undefined;
