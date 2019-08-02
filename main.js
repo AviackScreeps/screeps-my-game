@@ -31,6 +31,10 @@ module.exports.loop = function () {
         }
     }
 
+    if (Game.time % 5) {
+        Memory.bucket = Game.cpu.bucket;
+    }
+
    
 
     room = Game.rooms['W12S3'];
