@@ -4,7 +4,7 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function (creep) {
-        if (creep.memory.previousPosition = undefined) {
+        if (creep.memory.previousPosition == undefined) {
             creep.memory.previousPosition = { x: creep.pos.x, y: creep.pos.y, i: 0 };
         } else {
             creep.memory.previousPosition.i++;
