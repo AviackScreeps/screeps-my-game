@@ -26,7 +26,7 @@ var roleSupplyUpgrader = {
                 targetContainer = maxContainer;
             }
             else {
-                targetContainer = Game.getObjectById(reep.memory.targetContainerId);
+                targetContainer = Game.getObjectById(creep.memory.targetContainerId);
             }
 
 
