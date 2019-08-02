@@ -5,21 +5,40 @@ var roleSupplyUpgrader = {
     /** @param {Creep} creep **/
     run: function (creep) {
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
-            var containers = creep.room.find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0 })
 
-            var maxContainer = undefined;
-            var maxEnergy = 0;
-            for (let cont of containers) {
-                if (maxEnergy < cont.store[RESOURCE_ENERGY]) {
-                    maxEnergy = cont.store[RESOURCE_ENERGY];
-                    maxContainer = cont;
+            var targetContainer = undefined;
+            if (creep.memory.targetContainerId == undefined) {
+
+                var containers = creep.room.find(FIND_STRUCTURES, { filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0 })
+
+                var maxContainer = undefined;
+                var maxEnergy = 0;
+                for (let cont of containers) {
+                    if (maxEnergy < cont.store[RESOURCE_ENERGY]) {
+                        maxEnergy = cont.store[RESOURCE_ENERGY];
+                        maxContainer = cont;
+                    }
                 }
+
+                if (maxContainer != undefined) {
+                    creep.memory.targetContainerId = maxContainer.id;
+                }
+                targetContainer = maxContainer;
             }
-            if (maxContainer != undefined) {
-                var result = creep.withdraw(maxContainer, RESOURCE_ENERGY);
-                console.log(result);
+            else {
+                targetContainer = Game.getObjectById(reep.memory.targetContainerId);
+            }
+
+
+            if (targetContainer != undefined) {
+                var result = creep.withdraw(targetContainer, RESOURCE_ENERGY);
+                //console.log(result);
                 if (result == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(maxContainer);
+
+                    if (creep.memory.pathToContainer == undefined) {
+                        creep.memory.pathToContainer = creep.pos.findPathTo(targetContainer.pos, { ignoreCreeps: true })
+                    }
+                    creep.moveByPath(creep.memory.pathToContainer);
                 }
             } else {
                 var tomb = creep.pos.findClosestByPath(FIND_TOMBSTONES, { filter: (s) => s.store[RESOURCE_ENERGY]  > 0 });
