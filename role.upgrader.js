@@ -5,6 +5,13 @@ var roleUpgrader = {
     /** @param {Creep} creep **/
     run: function (creep) {
 
+        if (creep.room.name != 'W12S3') {
+            var exitCode = creep.room.findExitTo('W12S3');
+            var exitPos = creep.pos.findClosestByPath(exitCode);
+            creep.moveTo(exitPos);
+            return;
+        }
+
 
         if (creep.carry.energy < creep.carryCapacity && creep.memory.transfering == false) {
 
