@@ -1,29 +1,31 @@
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-var roleRanged = require('role.ranged');
-var roleWaller = require('role.waller');
-var roleBaseMeleeDefender = require('role.baseMeleeDefender');
-var roleAttacker = require('role.attacker');
-var roleLongDistanceMiner = require('role.longDistanceMiner');
-var roleSupplyUpgrader = require('role.supplyUpgrader');
+const roleHarvester = require('role.harvester');
+const roleUpgrader = require('role.upgrader');
+const roleBuilder = require('role.builder');
+const roleRanged = require('role.ranged');
+const roleWaller = require('role.waller');
+const roleBaseMeleeDefender = require('role.baseMeleeDefender');
+const roleAttacker = require('role.attacker');
+const roleLongDistanceMiner = require('role.longDistanceMiner');
+const roleSupplyUpgrader = require('role.supplyUpgrader');
 
 
 module.exports.loop = function () {
-   
-    if(Game.time % 250 == 0 || Memory.cleanNotifies == true) {
-        for(var name in Game.creeps) {
+
+    let newName;
+    let name;
+    if(Game.time % 250 === 0 || Memory.cleanNotifies === true) {
+        for(name in Game.creeps) {
             Game.creeps[name].notifyWhenAttacked(false);
 
         }
-        for(var name in Game.structures) {
+        for(name in Game.structures) {
             Game.structures[name].notifyWhenAttacked(false);
         }
         Memory.cleanNotifies = false
     }
 
     if (Game.time % 250) {
-        for (var name in Memory.creeps) {
+        for (name in Memory.creeps) {
             if (!Game.creeps[name]) {
                 delete Memory.creeps[name];
                 //console.log('Clearing non-existing creep memory:', name);
@@ -52,7 +54,7 @@ module.exports.loop = function () {
     if (underAttack) {
         console.log("attacked");
 
-        if (Memory.defenceParameters == undefined) {
+        if (Memory.defenceParameters === undefined) {
             initializeDefence(room);
         }
 
@@ -73,10 +75,10 @@ module.exports.loop = function () {
 
         console.log('need ' + numOfDefenders + ' defenders');
 
-        var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'baseMeleeDefender' && creep.spawning == false);
+        var defenders = _.filter(Game.creeps, (creep) => creep.memory.role === 'baseMeleeDefender' && creep.spawning === false);
 
         if (defenders.length < numOfDefenders) {
-            var newName = 'TikajZGorodu' + Game.time;
+            newName = 'TikajZGorodu' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([TOUGH, ATTACK, ATTACK, ATTACK, MOVE], newName,
                 { memory: { role: 'baseMeleeDefender' } });
         }
@@ -86,9 +88,10 @@ module.exports.loop = function () {
                 creep.memory.fightForYourLife = true;
             }
         } else {
-            var freeRamparts = [];
+            let freeRamparts = [];
+            var buildings = undefined;
             if (Memory.defenceParameters.LeftSectorEnemies > 0) {
-                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9, true);
+                buildings = room.lookForAtArea(LOOK_STRUCTURES, 31, 7, 37, 9, true);
                 for (let s of buildings) {
                     if (s.structureType == STRUCTURE_RAMPART) {
                         freeRamparts[freeRamparts.length - 1] = s;
@@ -97,7 +100,7 @@ module.exports.loop = function () {
                 //freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
             }
             if (Memory.defenceParameters.RightSectorEnemies > 0) {
-                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 30, 44, 46, 41, true);
+                buildings = room.lookForAtArea(LOOK_STRUCTURES, 30, 44, 46, 41, true);
                 for (let s of buildings) {
                     if (s.structureType == STRUCTURE_RAMPART) {
                         freeRamparts[freeRamparts.length - 1] = s;
@@ -106,7 +109,7 @@ module.exports.loop = function () {
                 //freeRamparts = _.concat(freeRamparts, _.filter(buildings, (s) => s.structureType == STRUCTURE_RAMPART));
             }
             if (Memory.defenceParameters.UpperSectorEnemies > 0) {
-                var buildings = room.lookForAtArea(LOOK_STRUCTURES, 15, 23, 17, 27, true);
+                buildings = room.lookForAtArea(LOOK_STRUCTURES, 15, 23, 17, 27, true);
                 for (let s of buildings) {
                     if (s.structureType == STRUCTURE_RAMPART) {
                         freeRamparts[freeRamparts.length - 1] = s;
@@ -120,7 +123,7 @@ module.exports.loop = function () {
                     _.pullAt(freeRamparts, [0]);
                 }
 
-                var rampart = Game.getObjectById(creep.memory.rampart);
+                let rampart = Game.getObjectById(creep.memory.rampart);
                 if (rampart.pos.isEqualTo(creep.pos)) {
                     var hostilesInrange = creep.pos.findInRange(FIND_HOSTILE_CREEPS, 1);
                     if (hostilesInrange.length > 0) {
@@ -143,10 +146,10 @@ module.exports.loop = function () {
         }
 
         //console.log('towers');
-        var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
+        towers = _.filter(Game.structures, (s) => s.structureType === STRUCTURE_TOWER);
 
         for (let tower of towers) {
-            var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             tower.attack(target);
         }
 
@@ -157,80 +160,80 @@ module.exports.loop = function () {
             delete Memory.defenceParameters;
         }
 
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
-        var wallers = _.filter(Game.creeps, (creep) => creep.memory.role == 'waller');
-        var attackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'attacker');
-        var SupplyUpgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'supplyupgrader');
+        let harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester');
+        let upgraders = _.filter(Game.creeps, (creep) => creep.memory.role === 'upgrader');
+        let builders = _.filter(Game.creeps, (creep) => creep.memory.role === 'builder');
+        let wallers = _.filter(Game.creeps, (creep) => creep.memory.role === 'waller');
+        let attackers = _.filter(Game.creeps, (creep) => creep.memory.role === 'attacker');
+        let SupplyUpgraders = _.filter(Game.creeps, (creep) => creep.memory.role === 'supplyupgrader');
         //console.log('Harvesters: ' + harvesters.length);
-        var amountOfHarvesters = 3;
-        var minimumAmountOfUpgraders = 1;
-        var amountOfUpgraders = 6;
-        var amountOfBuilders = 4;
-        var amountOfWallers = 2;
-        var amountOfAttackers = 0;
+        let amountOfHarvesters = 3;
+        let minimumAmountOfUpgraders = 1;
+        let amountOfUpgraders = 6;
+        let amountOfBuilders = 4;
+        let amountOfWallers = 2;
+        let amountOfAttackers = 0;
         //var amountOfLongDistanceMiners = 0;
-        var amountOfSupplyUpgraders = 2;
+        let amountOfSupplyUpgraders = 2;
 
-        var longDistanceMiningLocations = roleLongDistanceMiner.getMiningLocations();
-        var longDistanceMinersRequired = 0;
+        let longDistanceMiningLocations = roleLongDistanceMiner.getMiningLocations();
+        let longDistanceMinersRequired = 0;
         for (let i of longDistanceMiningLocations) {
             longDistanceMinersRequired += i.maxMiners;
         }
 
         if (harvesters.length < amountOfHarvesters) {
-            var newName = 'Harvester' + Game.time;
+            newName = 'Harvester' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName,
                 { memory: { role: 'harvester' } });
         }
         else if (upgraders.length < minimumAmountOfUpgraders) {
-            var newName = 'Upgrader' + Game.time;
+            newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
 
         else if (builders.length < amountOfBuilders) {
-            var newName = 'Builder' + Game.time;
+            newName = 'Builder' + Game.time;
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                     { memory: { role: 'builder' } });
-            
+
 
         }
         else if (upgraders.length < amountOfUpgraders) {
-            var newName = 'Upgrader' + Game.time;
+            newName = 'Upgrader' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'upgrader' } });
         }
         else if (longDistanceMinersRequired > 0) {
             console.log('required ' + longDistanceMinersRequired + 'long distance miners');
-            var newName = 'LongDistanceMiner' + Game.time;
+            newName = 'LongDistanceMiner' + Game.time;
 
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'longdistanceminer' } });
         }
         else if (SupplyUpgraders.length < amountOfSupplyUpgraders) {
-            var newName = 'SupplyUpgrader' + Game.time;
+            newName = 'SupplyUpgrader' + Game.time;
 
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'supplyupgrader' } });
         }
         else if (attackers.length < amountOfAttackers) {
-            var newName = 'NeOleg' + Game.time;
+            newName = 'NeOleg' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([ATTACK, ATTACK, MOVE, MOVE], newName,
                 { memory: { role: 'attacker' } });
         }
         else if (wallers.length < amountOfWallers) {
-            var newName = 'Waller' + Game.time;
+            newName = 'Waller' + Game.time;
             //console.log('Spawning new harvester: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName,
                 { memory: { role: 'waller' } });
         }
-        
+
 
         if (Game.spawns['Spawn1'].spawning) {
             var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
@@ -241,19 +244,19 @@ module.exports.loop = function () {
                 { align: 'left', opacity: 0.8 });
         }
     }
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
+    for(name in Game.creeps) {
+        let creep = Game.creeps[name];
 
-        if (underAttack == false && creep.memory.rampart != undefined) {
+        if (underAttack === false && creep.memory.rampart !== undefined) {
             delete creep.memory.rampart;    
         }
 
-        if (creep.memory.role == undefined) {
+        if (creep.memory.role === undefined) {
             console.log('undefined role');
-            var role = '';
-            var numbers = '1234567890';
+            let role = '';
+            let numbers = '1234567890';
             for (c of creep.name) {
-                if (numbers.search(c) == -1) {
+                if (numbers.search(c) === -1) {
                     role += c;
                 }
                 
@@ -265,35 +268,35 @@ module.exports.loop = function () {
 
         creep.memory.role = creep.memory.role.toLowerCase();
 
-        if(creep.memory.role == 'harvester') {
+        if(creep.memory.role === 'harvester') {
             roleHarvester.run(creep);
         }
-        if(creep.memory.role == 'upgrader') {
+        if(creep.memory.role === 'upgrader') {
             roleUpgrader.run(creep);
         }
-        if(creep.memory.role == 'builder') {
+        if(creep.memory.role === 'builder') {
             roleBuilder.run(creep);
         }
-        if (creep.memory.role == 'ranged') {
+        if (creep.memory.role === 'ranged') {
             roleRanged.run(creep, hostileCreeps);
         }
-        if (creep.memory.role == 'waller') {
+        if (creep.memory.role === 'waller') {
             roleWaller.run(creep);
         }
-        if (creep.memory.role == 'attacker') {
+        if (creep.memory.role === 'attacker') {
             roleAttacker.run(creep);
         }
-        if (creep.memory.role == 'supplyupgrader') {
+        if (creep.memory.role === 'supplyupgrader') {
             roleSupplyUpgrader.run(creep);
         }
-        if (creep.memory.role == 'longdistanceminer') {
+        if (creep.memory.role === 'longdistanceminer') {
             roleLongDistanceMiner.run(creep);
         }
     }
 
-    if (Memory.attackByTower == true) {
+    if (Memory.attackByTower === true) {
         //console.log('towers attacking anyway');
-        var towers = _.filter(Game.structures, (s) => s.structureType == STRUCTURE_TOWER);
+        var towers = _.filter(Game.structures, (s) => s.structureType === STRUCTURE_TOWER);
 
         for (let tower of towers) {
             var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
